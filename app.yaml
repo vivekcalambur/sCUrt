@@ -8,5 +8,15 @@ handlers:
 - url: /.*
   script: main.app
 
+libraries:
+- name: MySQLdb
+  version: "latest"
+
+env_variables:
+    PROJECT_ID: scurt-198704
+    CLOUDSQL_USER: root
+    CLOUDSQL_CONNECTION_NAME: scurt-198704:us-central1:mysql-1
+    CLOUDSQL_DB: scurt_db
+
 beta_settings:
   cloud_sql_instances: scurt-198704:us-central1:mysql-1
