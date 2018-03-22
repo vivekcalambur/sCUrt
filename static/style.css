@@ -3,17 +3,24 @@
   align-items: center;
   background: none;
   text-shadow: 0.25px 0.25px 0.25px #000000;
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh;
 }
 .jumbotron img{
   mix-blend-mode: multiply;
   background: none;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
 }
 .jumbotron a{
+  font-size: 30px;
   height: 35px;
-  width: 75px;
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  margin-right:20px;
 }
+
 body { 
   background: url(home_bg.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
