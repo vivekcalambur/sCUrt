@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
-  </head>
-
-  <body>
-  	{{ name }}
-  </body>
+<head>
+	<title>Scurt</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+	<header class="container">
+		<div class="row">
+			<div class="col-sm">
+				<img src="../static/logo.png" width="250" height="70">
+    		</div>
+    		<div class="col-6">
+    			<nav class="col-sm-8 text-right">
+      			</nav>
+      		</div>
+    	</div>
+	</header>
+	<section class="jumbotron">
+    <div class="container">
+      <div class="row text-center">
+        <h2>Login</h2>
+	    <form>
+	  		Email:<br>
+	  	<input type="text" name="email"><br>
+	  		Password:<br>
+	  	<input type="text" name="password">
+	  	<br>
+		</form>
+        <a class="btn btn-primary" role="button">Enter</a>
+      </div>
+    </div>
+  	</section>
+</body>
 </html>

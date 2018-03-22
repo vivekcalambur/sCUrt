@@ -1,7 +1,19 @@
-html { 
-  background: url(home_bg.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.jumbotron h2 {
+  font-size: 50px;
+  color: #fff;
+  font-family: Verdana;
+}
+
+.jumbotron form{
+  font-size: 20px;
+  color: #fff;
+  font-family: Verdana;
+}
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-image: url("home_bg.png");
+  height: 550px;
+  text-shadow: 0.25px 0.25px 0.25px #000000;
 }
