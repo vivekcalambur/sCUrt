@@ -57,7 +57,21 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-# @app.route("/signup", method=['POST'])
-# def signup():
-#     username = request.
+@app.route("/signup", methods=['POST'])
+def signup():
+    email = request.form['email']
+    pw = request.form['password']
+    fname = request.form['first_name']
+    lname = request.form['last_name']
+    age = int(request.form['age'])
+    address = request.form['address']
+    phone = request.form['phone']
 
+    sql = "INSERT INTO Users (email, password, first_name, last_name, age, address, phone)" \
+          " VALUES (\'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\', \'%s\')" \
+          % (email, pw, fname, lname, age, address, phone)
+
+    cursor.execute(sql)
+    db.commit()
+
+    return render_template('index.html')
