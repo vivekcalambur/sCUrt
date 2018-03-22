@@ -8,6 +8,10 @@
   mix-blend-mode: multiply;
   background: none;
 }
+.jumbotron a{
+  height: 35px;
+  width: 75px;
+}
 body { 
   background: url(home_bg.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
