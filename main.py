@@ -56,5 +56,5 @@ cursor = db.cursor()
 @app.route("/")
 def index():
     cursor.execute("SHOW TABLES")
-    temp = cursor.fetchall()
+    temp = cursor.fetchone()
     return temp
