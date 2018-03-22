@@ -48,13 +48,13 @@ def connect_to_cloudsql():
 
     return db
 
-
-app = Flask(__name__)
 db = connect_to_cloudsql()
 cursor = db.cursor()
+
+app = Flask(__name__)
 
 @app.route("/")
 def index():
     cursor.execute("SHOW TABLES")
     temp = cursor.fetchone()
-    return temp
+    return render_template('index.html', name=temp[0])
