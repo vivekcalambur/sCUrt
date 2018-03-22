@@ -8,8 +8,8 @@
   mix-blend-mode: multiply;
   background: none;
   max-width: 100%;
-  height: auto;
-  width: auto\9;
+  width: 350px; 
+  height: 200px;
 }
 .jumbotron a{
   font-size: 30px;
