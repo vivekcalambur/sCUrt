@@ -3,9 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 db = SQLAlchemy()
-
-app.config.from_pyfile('../config.py')
+app.config.from_pyfile('config.py')
 db.init_app(app)
+
+with app.app_context():
+    result = db.engine.execute('show tables;')
+    rows = result.fetchall()
+    print rows[0][0]
 
 @app.route('/form')
 def form():
@@ -20,7 +24,7 @@ def submitted_form():
 
     return render_template(
         'submitted_form.html',
-        name=name,
+        name=rows,
         email=email,
         site=site,
         comments=comments)

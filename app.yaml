@@ -8,4 +8,5 @@ handlers:
 - url: /.*
   script: main.app
 
-cloud_sql_instances: scurt-198704:us-central1:mysql-1
+beta_settings:
+  cloud_sql_instances: scurt-198704:us-central1:mysql-1
