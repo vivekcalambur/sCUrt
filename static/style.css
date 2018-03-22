@@ -3,6 +3,8 @@
   align-items: center;
   background: none;
   text-shadow: 0.25px 0.25px 0.25px #000000;
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
 }
 .jumbotron img{
   mix-blend-mode: multiply;
