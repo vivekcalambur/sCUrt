@@ -55,6 +55,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    cursor.execute("SHOW TABLES")
-    temp = cursor.fetchone()
-    return render_template('index.html', name=temp[0])
+    return render_template('index.html')
+
+# @app.route("/signup", method=['POST'])
+# def signup():
+#     username = request.
+
