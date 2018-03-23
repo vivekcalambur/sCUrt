@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sCUrt</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <section class="jumbotron">
+      <div class="container">
+        <div class="row text-center">
+          <img src="../static/logo.png">
+        <br/><br/>
+        <button type='button' class="btn btn-primary" id="Sign Up" data-toggle="modal" data-target="#signUpWindow">Add Car</button>
+          <div class="modal fade" id="signUpWindow">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- header -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h3 class="modal-title">REGISTER</h3>
+              </div>
+              <!-- body -->
+              <div class="modal-header">
+                <form action="/add_car" method="post">
+                  <div class="form-group">
+                    <input name="make" class="form-control" placeholder="make"/><br/>
+                    <input name="model" class="form-control" placeholder="model"/><br/>
+                    <input name="license_plate" type="email" class="form-control" placeholder="license plate number"/><br/>
+                    <input name="state" type="password" class="form-control" placeholder="State"/><br/>
+                    <input name="mpg" type="number" class="form-control" placeholder="mpg"/><br/>
+                    <input name="odometer" class="form-control" placeholder="odometer"/><br/>
+                  </div>
+              </div>
+              <!-- footer -->
+              <div class="modal-footer">
+                <button class="btn btn-primary btn-block">Sign Up</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      </section>
+  </body>
+</html>

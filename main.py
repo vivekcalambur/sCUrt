@@ -13,22 +13,22 @@ CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
 #   ./cloud_sql_proxy -instances="scurt-198704:us-central1:mysql-1"=tcp:3307
 #   dev_appserver.py app.yaml
 #
-#   address: 
+#   address:
 #   http://localhost:8080
 
 # app engine
 #   run:
 #   gcloud app deploy
 #
-#   address: 
-#   https://scurt-198704.appspot.com   
+#   address:
+#   https://scurt-198704.appspot.com
 
 
 # function to establish local/app engine connection to cloud SQL
 def connect_to_cloudsql():
     # app engine connection
     if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/'):
-        cloudsql_unix_socket = os.path.join('/cloudsql', 
+        cloudsql_unix_socket = os.path.join('/cloudsql',
             CLOUDSQL_CONNECTION_NAME)
         db = MySQLdb.connect(
             unix_socket=cloudsql_unix_socket,
@@ -39,7 +39,7 @@ def connect_to_cloudsql():
     else:
         db = MySQLdb.connect(
             host='127.0.0.1',
-            port=3307, 
+            port=3307,
             user=CLOUDSQL_USER,
             db=CLOUDSQL_DB)
 
@@ -88,9 +88,10 @@ def login():
     cursor.execute(sql)
     if not cursor.rowcount:
         return render_template('index.html')
+
     else:
         record = cursor.fetchone()
         g.user_id = record[0]
         g.user_name = record[1] + ' ' + record[2]
 
-    return str(g.user_id)
+    return render_template('index.html',name=g.user_name)
