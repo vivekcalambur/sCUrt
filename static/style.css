@@ -1,4 +1,5 @@
 .jumbotron {
+	font-family: Raleway
   display: flex;
   align-items: center;
   background: none;
@@ -12,7 +13,8 @@
   height: 200px;
 }
 .jumbotron button{
-  font-size: 30px;
+	font-family: Raleway;
+  font-size: 25px;
   height: 35px;
   width: 150px;
   max-width: 100%;
@@ -20,6 +22,20 @@
   width: auto\9;
   margin-right:20px;
   margin-left:20px;
+}
+.modal-header{
+	font-family: Raleway;
+}
+.modal-footer button{
+	font-family: Raleway;
+	font-size: 15px;
+  height: 20px;
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  margin-right:auto;
+  margin-left:auto;
 }
 
 body { 

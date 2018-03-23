@@ -1,6 +1,6 @@
 import os
 import MySQLdb
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -8,9 +8,7 @@ CLOUDSQL_USER = os.environ.get('CLOUDSQL_USER')
 CLOUDSQL_DB = os.environ.get('CLOUDSQL_DB')
 CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
 
-
 # local
-#
 #   run:
 #   ./cloud_sql_proxy -instances="scurt-198704:us-central1:mysql-1"=tcp:3307
 #   dev_appserver.py app.yaml
@@ -19,7 +17,6 @@ CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
 #   http://localhost:8080
 
 # app engine
-#
 #   run:
 #   gcloud app deploy
 #
@@ -67,11 +64,32 @@ def signup():
     address = request.form['address']
     phone = request.form['phone']
 
-    sql = "INSERT INTO Users (email, password, first_name, last_name, age, address, phone)" \
-          " VALUES (\'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\', \'%s\')" \
+    sql = "INSERT INTO Users (email, password, first_name, last_name, age, address, phone) "\
+          "VALUES (\'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\', \'%s\')"\
           % (email, pw, fname, lname, age, address, phone)
 
     cursor.execute(sql)
     db.commit()
 
     return render_template('index.html')
+
+@app.route("/login", methods=['POST'])
+def login():
+    email = request.form['email']
+    pw = request.form['password']
+
+    sql = "SELECT user_id, first_name, last_name from Users " \
+          "WHERE email=\'%s\' AND password=\'%s\'"\
+          % (email, pw)
+
+    cursor.execute(sql)
+    if not cursor.rowcount:
+        return render_template('index.html')
+    else:
+        record = cursor.fetchone()
+        print record
+        g.user_id = record[0]
+        g.user_name = record[1] + ' ' + record[2]
+
+    return g.user_id
+
