@@ -16,18 +16,18 @@
 	        <img src="../static/logo.png">
 		  	<br>
 		  	<br>
-		  	<button type='button' class="btn btn-primary" id="Sign Up" data-toggle="modal" data-target="#signUpWindow">Sign Up</button>
-		  		<div class="modal fade" id="signUpWindow">
+		  	<button type='button' class="btn btn-primary" id="Log In" data-toggle="modal" data-target="#logInWindow">Log In</button>
+		  		<div class="modal fade" id="logInWindow">
 			    <div class="modal-dialog">
 			      <div class="modal-content">
 			        <!-- header -->
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal"></button>
-			          <h3 class="modal-title">Sign Up for sCUrt!</h3>
+			          <h3 class="modal-title">Enter Your Username and Password</h3>
 			        </div>
 			        <!-- body -->
 			        <div class="modal-header">
-			          <form action="/signup">
+			          <form action="https://scurt-198704.appspot.com/login" method="post">
 			            <div class="form-group">
 			              <input type="email" class="form-control" placeholder="Email"/>
 			              <input type="password" class="form-control" placeholder="Password" />
@@ -42,31 +42,31 @@
 			    </div>
 			  </div>
 
-				<button type='button' class="btn btn-primary" id="Log In" data-toggle="modal" data-target="#LogInWindow">Log In</button>
-		  		<div class="modal fade" id="LogInWindow">
+				<button type='button' class="btn btn-primary" id="Sign Up" data-toggle="modal" data-target="#signUpWindow">Sign Up</button>
+		  		<div class="modal fade" id="signUpWindow">
 			    <div class="modal-dialog">
 			      <div class="modal-content">
 			        <!-- header -->
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal"></button>
-			          <h3 class="modal-title">Enter Your Username and Password</h3>
+			          <h3 class="modal-title">Enter Your Information</h3>
 			        </div>
 			        <!-- body -->
 			        <div class="modal-header">
 			          <form action="https://scurt-198704.appspot.com/signup" method="post">
 			            <div class="form-group">
-			              <input type="email" class="form-control" placeholder="Email"/>
-			              <input type="password" class="form-control" placeholder="Password" />
-										<input type="first_name" class="form-control" placeholder="first_name" />
-										<input type="last_name" class="form-control" placeholder="last_name" />
-										<input type="age" class="form-control" placeholder="age"/>
-										<input type="address" class="form-control" placeholder="address"/>
-										<input type="phone" class="form-control" placeholder="phone" />
+			              <input name="email" class="form-control" placeholder="Email"/>
+			              <input name="password" class="form-control" placeholder="Password" />
+										<input name="first_name" class="form-control" placeholder="first_name" />
+										<input name="last_name" class="form-control" placeholder="last_name" />
+										<input name="age" class="form-control" placeholder="age"/>
+										<input name="address" class="form-control" placeholder="address"/>
+										<input name="phone" class="form-control" placeholder="phone" />
 			            </div>
 			        </div>
 			        <!-- footer -->
 			        <div class="modal-footer">
-			          <button class="btn btn-primary btn-block">Log In</button>
+			          <button class="btn btn-primary btn-block">Sign Up</button>
 			        </div>
 							</form>
 			      </div>
