@@ -96,3 +96,12 @@ def login():
 
     return render_template('login.html')
 
+@app.route("/add_car", methods=['POST'])
+def add_car():
+    sql = "INSERT INTO Car (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
+          "VALUES (\'%s\', \'%s\', %d, %d, \'%s\', \'%s\', %d, %d)"\
+          % (request.form['state'], request.form['license_plate'], int(request.form['odometer']), int(request.form['mpg']), request.form['make'], request.form['model'], int(request.form['year']),int(g.user_id))
+    cursor.execute(sql)
+    db.commit()
+
+    return render_template('login.html')
