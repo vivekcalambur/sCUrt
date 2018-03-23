@@ -11,6 +11,7 @@ body {
 }
 .jumbotron a{
 	color: #fff;
+	text-decoration: none;
 }
 .jumbotron button{
   font-family: Raleway;
@@ -24,11 +25,17 @@ body {
 
 header {
   padding: 5px;
+  color: #fff;
 }
 
 header .row{
   display: flex;
   align-items: center;
+}
+
+ header a{
+	color: #fff;
+	text-decoration: none;
 }
 
 header nav {
