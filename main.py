@@ -90,7 +90,6 @@ def login():
         return render_template('index.html')
     else:
         record = cursor.fetchone()
-        print record
         g.user_id = record[0]
         g.user_name = record[1] + ' ' + record[2]
 
