@@ -16,11 +16,12 @@ body {
 .jumbotron button{
   font-family: Raleway;
   font-size: 25px;
-  height: 80px;
-  width: 170px;
+  height: 100px;
+  width: 200px;
   max-width: 100%;
-  margin-right:20px;
-  margin-left:20px;
+  margin-right:40px;
+  margin-left:40px;
+  margin-top: 40px
 }
 
 header {

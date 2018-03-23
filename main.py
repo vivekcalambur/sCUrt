@@ -94,4 +94,4 @@ def login():
         g.user_id = record[0]
         g.user_name = record[1] + ' ' + record[2]
 
-    return render_template('index.html',name=g.user_name)
+    return render_template('login.html')

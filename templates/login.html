@@ -12,20 +12,20 @@
   <header class="container">
     <div class="row">
       <div class="col-sm-4">
-        <img src="../static/logo.png" width="250" height="80">
+        <img src="../static/logo.png" width="180" height="60">
       </div>
       <div class="col-sm-4 text-center">
           <p>
-            Welcome, {{ name }}
+            Welcome, {{ g.user_name }}!
           </p>
       </div>
       <div class="col-sm-4 text-right">
         <nav>
           <p>
-            <a href="index.html">Edit Profile</a>
+            <a href="/edituser">Edit Profile</a>
           </p>
           <p>
-            <a href="index.html">Sign Out</a>
+            <a href="/signout">Sign Out</a>
           </p>
         </nav>
       </div>
@@ -35,19 +35,25 @@
     <div class="container">
       <div class="row text-center">
         <button type='button' class="btn btn-primary" id="addcar">
-          <a href="index.html">Add Car</a>
+          <a href="/addcar">List Car</a>
         </button>
-        <button type='button' class="btn btn-primary" id="schedcar">
-          <a href="index.html">Schedule Car</a>
+        <button type='button' class="btn btn-primary" id="updatecar">
+          <a href="/editcar">Update Car</a>
+        </button>
+        <button type='button' class="btn btn-primary" id="schedulecar">
+          <a href="/schedulecar">Schedule Car</a>
         </button>
       </div>
       <br/>
       <div class="row text-center">
-        <button type='button' class="btn btn-primary" id="editcar">
-          <a href="index.html">Edit Car</a>
+        <button type='button' class="btn btn-primary" id="rentcar">
+          <a href="/rentcar">Rent Car</a>
         </button>
-        <button type='button' class="btn btn-primary" id="bookcar">
-          <a href="index.html">Book Car</a>
+        <button type='button' class="btn btn-primary" id="tripplanner">
+          <a href="/tripplanner">Trip Planner</a>
+        </button>
+        <button type='button' class="btn btn-primary" id="writereview">
+          <a href="/writereview">Write Review</a>
         </button>
       </div>
     </div>
