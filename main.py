@@ -105,3 +105,14 @@ def add_car():
     db.commit()
 
     return render_template('login.html')
+
+
+@app.route("/update", methods=['POST'])
+def update_car():
+    sql = "UPDATE Car SET odometer=odometer+%d"\
+          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
+          % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
+    cursor.execute(sql)
+    db.commit()
+
+    return render_template('login.html')
