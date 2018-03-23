@@ -8,6 +8,7 @@ body {
 
 .jumbotron{
 	background: none;
+  justify-content: center;
 }
 .jumbotron a{
 	color: #fff;
