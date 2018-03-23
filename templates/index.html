@@ -6,16 +6,29 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
+		<script src="../static/script.js"></script>
 	</head>
 	<body>
 		<section class="jumbotron">
 	    <div class="container">
-	      <div class="row text-center", >
+	      <div class="row text-center">
 	        <img src="../static/logo.png">
 		  	<br>
-		  	<br>
-		  	<a class="btn btn-primary" id= "Sign Up" role="button">Sign Up</a>
-	        <a class="btn btn-primary" id= "Login" role="button">Login</a>
+		  	<a class="btn btn-primary" id= "signup" role="button">Sign Up</a>
+		  	<div id="signupForm">
+			  <h1>Sign Up for sCUrt</h1>
+			  <form action="#">
+			    <input placeholder="Email" type="email" required />
+			    <input placeholder="Password" type="text" required />
+			    <input placeholder="First Name" type="text" required />
+			    <input placeholder="Last Name" type="text" required />
+			    <input placeholder="Age" type="text" required />
+			    <input placeholder="Address" type="text" required />
+			    <input placeholder="Phone" type="text" required />
+			    <input class="formBtn" type="submit" />
+			  </form>
+			</div>
+	        <a class="btn btn-primary" id= "login" role="button">Login</a>
 	      </div>
 	    </div>
 	  	</section>
