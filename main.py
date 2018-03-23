@@ -1,6 +1,6 @@
 import os
 import MySQLdb
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request, g, session
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -49,6 +49,7 @@ db = connect_to_cloudsql()
 cursor = db.cursor()
 
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 # home page
 @app.route("/")
@@ -91,38 +92,50 @@ def login():
 
     else:
         record = cursor.fetchone()
-        g.user_id = record[0]
-        g.user_name = record[1] + ' ' + record[2]
+        session['user_id'] = record[0]
+        session['user_name'] = record[1] + ' ' + record[2]
 
     return render_template('login.html')
 
-@app.route("/add_car", methods=['POST'])
+@app.route("/add_car")
 def add_car():
+    return render_template('add_car.html')
+
+@app.route("/submit_add_car", methods=['POST'])
+def submit_add_car():
+    state = request.form['state']
+    lic_plate = request.form['license_plate']
+    odometer = int(request.form['odometer'])
+    mpg = int(request.form['mpg'])
+    make = request.form['make']
+    model = request.form['model']
+    year = int(request.form['year'])
+
     sql = "INSERT INTO Car (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
           "VALUES (\'%s\', \'%s\', %d, %d, \'%s\', \'%s\', %d, %d)"\
-          % (request.form['state'], request.form['license_plate'], int(request.form['odometer']), int(request.form['mpg']), request.form['make'], request.form['model'], int(request.form['year']),int(g.user_id))
+          % (state, lic_plate, odometer, mpg, make, model, year, session['user_id'])
+
     cursor.execute(sql)
     db.commit()
 
     return render_template('login.html')
 
+# @app.route("/update_mileage", methods=['POST'])
+# def update_car():
+#     sql = "UPDATE Car SET odometer=odometer+%d"\
+#           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
+#           % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
+#     cursor.execute(sql)
+#     db.commit()
 
-@app.route("/update_mileage", methods=['POST'])
-def update_car():
-    sql = "UPDATE Car SET odometer=odometer+%d"\
-          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
-          % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
-    cursor.execute(sql)
-    db.commit()
+#     return render_template('login.html')
 
-    return render_template('login.html')
+# @app.route("/delete_car", methods=['POST'])
+# def delete_car():
+#     sql = "DELETE FROM Car"\
+#           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
+#           % (request.form['state'], request.form['license_plate']))
+#     cursor.execute(sql)
+#     db.commit()
 
-@app.route("/delete_car", methods=['POST'])
-def update_car():
-    sql = "DELETE FROM Car"\
-          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
-          % (request.form['state'], request.form['license_plate']))
-    cursor.execute(sql)
-    db.commit()
-
-    return render_template('login.html')
+#     return render_template('login.html')

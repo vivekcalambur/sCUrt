@@ -11,23 +11,38 @@
     <link rel="stylesheet" type="text/css" href="../static/add.css">
   </head>
   <body>
-    <section class="jumbotron">
-      <div class="container">
-        <div class="row text-center", id = "row">
-          <img src="../static/logo.png" width="300" height="100">
-        <br/><br/>
-        </div>
+    <header class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="../static/logo.png" width="180" height="60">
       </div>
-        <div class="row text-center", id = "form">
+      <div class="col-sm-4 text-center">
+          <p>
+            Welcome, {{ session['user_name'] }}!
+          </p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <nav>
+          <p>
+            <a href="/edituser">Edit Profile</a>
+          </p>
+          <p>
+            <a href="/signout">Sign Out</a>
+          </p>
+        </nav>
+      </div>
+    </div>
+    </header>
+    <section class="jumbotron">
+      </div>
+        <div class="row text-center", id="form">
           <h2>Add Car</h2>
           <p>Please input accurate information</p>
           <div class="container">
-            <form action="/action_page.php">
+            <form action="/submit_add_car" method="post">
               <div class="row">
-                <div class="col-25">
-                  <label for="make">Make</label>
-                </div>
-                <div class="col-xs-3">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
                   <select id="make" name="make" placeholder="make">
                     <option value="make">Make</option>
                     <option value="ACURA">ACURA</option>
@@ -76,28 +91,36 @@
                     <option value="VOLVO">VOLVO</option>
                   </select>
                 </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
               <div class="row">
-                <div class="col-25">
-                  <label for="model">Model</label>
-                </div>
-                <div class="col-xs-3">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
                   <input type="text" name="model" class="form-control" placeholder="model"/>
                 </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
               <div class="row">
-                <div class="col-25">
-                  <label for="license_plate">License Plate Number</label>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <input type="number" name="year" class="form-control" placeholder="year"/>
                 </div>
-                <div class="col-xs-3">
-                  <input type="text" id="license_plate" class="form-control" placeholder="license plate number"/>
-                </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
               <div class="row">
-                <div class="col-25">
-                  <label for="state">State</label>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <input type="text" name="license_plate" class="form-control" placeholder="license plate"/>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-4"></div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
                   <select id="state" name="state" placeholder="state">
                     <option value="state"> State</option>
                     <option value="AL">Alabama</option>
@@ -153,26 +176,28 @@
                     <option value="WY">Wyoming</option>
                   </select>
                 </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
               <div class="row">
-                <div class="col-25">
-                  <label for="mpg">Miles Per Gallon</label>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <input type="number" name="mpg" class="form-control" placeholder="mpg"/>
                 </div>
-                <div class="col-xs-3">
-                  <input type="text" id="mpg" class="form-control" placeholder="mpg"/>
-                </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
               <div class="row">
-                <div class="col-25">
-                  <label for="odometer">Odometer</label>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <input type="number" name="odometer" class="form-control" placeholder="odometer"/>
                 </div>
-                <div class="col-xs-3">
-                  <input type="text" id="odometer" class="form-control" placeholder="odometer"/>
-                </div>
+                <div class="col-sm-4"></div>
               </div>
+              <br/>
+              <br/>
                <div class="row">
-                <button type="button" class="btn btn-primary" id="submit">
-                  <a href="/">Submit</a>
+                <button class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>

@@ -16,7 +16,7 @@
       </div>
       <div class="col-sm-4 text-center">
           <p>
-            Welcome, {{ g.user_name }}!
+            Welcome, {{ session['user_name'] }}!
           </p>
       </div>
       <div class="col-sm-4 text-right">
@@ -35,25 +35,25 @@
     <div class="container">
       <div class="row text-center">
         <button type='button' class="btn btn-primary" id="addcar">
-          <a href="/addcar">List Car</a>
+          <a href="/add_car">List Car</a>
         </button>
         <button type='button' class="btn btn-primary" id="updatecar">
-          <a href="/editcar">Update Car</a>
+          <a href="/edit_car">Update Car</a>
         </button>
         <button type='button' class="btn btn-primary" id="schedulecar">
-          <a href="/schedulecar">Schedule Car</a>
+          <a href="/schedule_car">Schedule Car</a>
         </button>
       </div>
       <br/>
       <div class="row text-center">
         <button type='button' class="btn btn-primary" id="rentcar">
-          <a href="/rentcar">Rent Car</a>
+          <a href="/rent_car">Rent Car</a>
         </button>
         <button type='button' class="btn btn-primary" id="tripplanner">
-          <a href="/tripplanner">Trip Planner</a>
+          <a href="/trip_planner">Trip Planner</a>
         </button>
         <button type='button' class="btn btn-primary" id="writereview">
-          <a href="/writereview">Write Review</a>
+          <a href="/write_review">Write Review</a>
         </button>
       </div>
     </div>
