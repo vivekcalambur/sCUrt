@@ -50,10 +50,12 @@ cursor = db.cursor()
 
 app = Flask(__name__)
 
+# home page
 @app.route("/")
 def index():
     return render_template('index.html')
 
+# sign up
 @app.route("/signup", methods=['POST'])
 def signup():
     email = request.form['email']
@@ -73,6 +75,7 @@ def signup():
 
     return render_template('index.html')
 
+# login
 @app.route("/login", methods=['POST'])
 def login():
     email = request.form['email']
@@ -91,5 +94,4 @@ def login():
         g.user_id = record[0]
         g.user_name = record[1] + ' ' + record[2]
 
-    return g.user_id
-
+    return str(g.user_id)
