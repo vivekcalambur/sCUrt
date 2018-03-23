@@ -116,3 +116,13 @@ def update_car():
     db.commit()
 
     return render_template('login.html')
+
+@app.route("/delete_car", methods=['POST'])
+def update_car():
+    sql = "DELETE FROM Car"\
+          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
+          % (request.form['state'], request.form['license_plate']))
+    cursor.execute(sql)
+    db.commit()
+
+    return render_template('login.html')
