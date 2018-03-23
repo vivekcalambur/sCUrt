@@ -1,0 +1,96 @@
+body { 
+  background: url(home_bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.jumbotron{
+	background: none;
+	color: #fff;
+}
+
+.jumbotron a{
+	color: #fff;
+}
+
+select{
+	width: 100%;
+  color: #000;
+}
+
+form{
+	background: none;
+  	align-items: center;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+label {
+    display: inline-block;
+    align-items: center;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-sm-4 {
+	display: inline-block;
+    float: center;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+button {
+    width: 120px;
+    height: 40px;
+}
+
+header {
+  padding: 5px;
+  color: #fff;
+  font-family: Raleway;
+  font-size: 16px
+}
+
+header .row{
+  display: flex;
+  align-items: center;
+}
+
+ header a{
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
