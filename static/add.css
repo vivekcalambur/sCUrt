@@ -17,6 +17,7 @@ body {
 
 select{
 	width: 100%;
+  color: #000;
 }
 
 form{

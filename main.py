@@ -59,12 +59,12 @@ def index():
 # sign up
 @app.route("/signup", methods=['POST'])
 def signup():
-    email = request.form['email']
+    email = request.form['email'].lower()
     pw = request.form['password']
-    fname = request.form['first_name']
-    lname = request.form['last_name']
+    fname = request.form['first_name'].title()
+    lname = request.form['last_name'].title()
     age = int(request.form['age'])
-    address = request.form['address']
+    address = request.form['address'].title()
     phone = request.form['phone']
 
     sql = "INSERT INTO Users (email, password, first_name, last_name, age, address, phone) "\
@@ -103,12 +103,12 @@ def add_car():
 
 @app.route("/submit_add_car", methods=['POST'])
 def submit_add_car():
-    state = request.form['state']
-    lic_plate = request.form['license_plate']
+    state = request.form['state'].upper()
+    lic_plate = request.form['license_plate'].upper()
     odometer = int(request.form['odometer'])
     mpg = int(request.form['mpg'])
-    make = request.form['make']
-    model = request.form['model']
+    make = request.form['make'].title()
+    model = request.form['model'].title()
     year = int(request.form['year'])
 
     sql = "INSERT INTO Car (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
