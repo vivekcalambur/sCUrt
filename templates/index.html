@@ -42,11 +42,40 @@
 			    </div>
 			  </div>
 
-	        <button type='button' class="btn btn-primary" id="Login" data-toggle="modal" data-target="#popUpWindow">Login</a>
+				<button type='button' class="btn btn-primary" id="Log In" data-toggle="modal" data-target="#LogInWindow">Log In</button>
+		  		<div class="modal fade" id="LogInWindow">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <!-- header -->
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal"></button>
+			          <h3 class="modal-title">Enter Your Username and Password</h3>
+			        </div>
+			        <!-- body -->
+			        <div class="modal-header">
+			          <form action="https://scurt-198704.appspot.com/signup" method="post">
+			            <div class="form-group">
+			              <input type="email" class="form-control" placeholder="Email"/>
+			              <input type="password" class="form-control" placeholder="Password" />
+										<input type="first_name" class="form-control" placeholder="first_name" />
+										<input type="last_name" class="form-control" placeholder="last_name" />
+										<input type="age" class="form-control" placeholder="age"/>
+										<input type="address" class="form-control" placeholder="address"/>
+										<input type="phone" class="form-control" placeholder="phone" />
+			            </div>
+			        </div>
+			        <!-- footer -->
+			        <div class="modal-footer">
+			          <button class="btn btn-primary btn-block">Log In</button>
+			        </div>
+							</form>
+			      </div>
+			    </div>
+			  </div>
 	      </div>
 	    </div>
 	  	</section>
 	</body>
- 
+
 
 </html>
