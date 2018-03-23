@@ -7,52 +7,23 @@ body {
 }
 
 .jumbotron{
-	background: none;
-	color: #fff;
+  background: none;
+  color: #fff;
 }
 
 .jumbotron a{
-	color: #fff;
+  color: #fff;
 }
 
-select{
-	width: 100%;
+table{
   color: #000;
+  border-spacing: 23px;
 }
 
-form{
-	background: none;
-  	align-items: center;
-}
-
-input[type=text]{
-    width: 100%;
-    padding: 20px;
-    border-radius: 4px;
-}
-
-label {
-    display: inline-block;
-    align-items: center;
-}
-
-.col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-}
-
-.col-sm-4 {
-	display: inline-block;
-    float: center;
-
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
 }
 
 button {
@@ -85,12 +56,4 @@ header nav {
 header p {
   padding: 0 20px;
   margin: 0;
-}
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
-        width: 100%;
-        margin-top: 0;
-    }
 }

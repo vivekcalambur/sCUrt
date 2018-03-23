@@ -32,6 +32,26 @@
         </nav>
       </div>
     </div>
-      </section>
+    <section class="jumbotron">
+      <table>
+        <caption>Your Cars</caption>
+      <TR>
+        <th>Year</th>
+        <th>Make</th> 
+        <th>Model</th>
+        <th>Odometer</th>
+        <th>Delete</th>
+      </TR>
+      <TR>
+        <!-- {% for item in items %} -->
+         <TD class="Year">{{item.date}}</TD>
+         <TD class="Make">{{item.date}}</TD>
+         <TD class="Model">{{item.id}}</TD>
+         <TD class="Odometer"><input type="text" value="default value"></TD>
+         <TD class="Delete"><input type="checkbox" name="name1" />&nbsp;</TD>
+      </TR>
+        <!-- {% endfor %} -->
+      </table>
+    </section>
   </body>
 </html>
