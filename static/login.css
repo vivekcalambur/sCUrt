@@ -9,3 +9,34 @@ body {
 .jumbotron{
 	background: none;
 }
+.jumbotron a{
+	color: #fff;
+}
+.jumbotron button{
+  font-family: Raleway;
+  font-size: 25px;
+  height: 80px;
+  width: 170px;
+  max-width: 100%;
+  margin-right:20px;
+  margin-left:20px;
+}
+
+header {
+  padding: 5px;
+}
+
+header .row{
+  display: flex;
+  align-items: center;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
