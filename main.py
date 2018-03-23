@@ -95,3 +95,21 @@ def login():
         g.user_name = record[1] + ' ' + record[2]
 
     return render_template('index.html',name=g.user_name)
+
+@app.route("/add_car", methods=['POST'])
+def signup():
+    make = request.form['make']
+    model = request.form['model']
+    plate = request.form['license_plate']
+    state = request.form['state']
+    mpg = int(request.form['mpg'])
+    odometer = request.form['odometer']
+
+    sql = "INSERT INTO CAR (owner_id, make, model, license_plate, state, mpg, odometer) "\
+          "VALUES (\'%s\',\'%s\', \'%s\', \'%s\', \'%s\', %s, \'%d\')"\
+          % (g.user_id, make, model, license_plate, state, mpg, odometer)
+
+    cursor.execute(sql)
+    db.commit()
+
+    return render_template('index.html')
