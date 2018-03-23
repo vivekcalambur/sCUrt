@@ -107,7 +107,7 @@ def add_car():
     return render_template('login.html')
 
 
-@app.route("/update", methods=['POST'])
+@app.route("/update_mileage", methods=['POST'])
 def update_car():
     sql = "UPDATE Car SET odometer=odometer+%d"\
           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
