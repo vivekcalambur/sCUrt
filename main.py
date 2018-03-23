@@ -95,3 +95,4 @@ def login():
         g.user_name = record[1] + ' ' + record[2]
 
     return render_template('login.html')
+
