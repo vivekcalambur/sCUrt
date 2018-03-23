@@ -1,6 +1,3 @@
-@import "https://fonts.googleapis.com/css?family=Raleway";
-
-
 .jumbotron {
   display: flex;
   align-items: center;
@@ -12,9 +9,9 @@
   background: none;
   max-width: 100%;
   width: 600px; 
-  height: 250px;
+  height: 200px;
 }
-#signup{
+.jumbotron button{
   font-size: 30px;
   height: 35px;
   width: 150px;
@@ -23,58 +20,6 @@
   width: auto\9;
   margin-right:20px;
   margin-left:20px;
-}
-#signup:hover { background: #666; }
-#signup:active { background: #444; }
-#login{
-  font-size: 30px;
-  height: 35px;
-  width: 150px;
-  max-width: 100%;
-  height: auto;
-  width: auto\9;
-  margin-right:20px;
-  margin-left:20px;
-}
-#login:hover { background: #666; }
-#login:active { background: #444; }
-#signupForm { 
-  display: none;
-  border: 6px solid salmon; 
-  padding: 2em;
-  width: 400px;
-  text-align: center;
-  background: #fff;
-  position: fixed;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%)
-}
-
-input, textarea { 
-  margin: .8em auto;
-  font-family: inherit; 
-  text-transform: inherit; 
-  font-size: inherit;
-  
-  display: block; 
-  width: 280px; 
-  padding: .4em;
-}
-
-textarea { height: 80px; resize: none; }
-
-.formBtn { 
-  width: 140px;
-  display: inline-block;
-  
-  background: teal;
-  color: #fff;
-  font-weight: 100;
-  font-size: 1.2em;
-  border: none;
-  height: 30px;
 }
 
 body { 

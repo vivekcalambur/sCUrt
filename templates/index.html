@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../static/style.css">
-		<script src="../static/script.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<section class="jumbotron">
@@ -14,23 +15,38 @@
 	      <div class="row text-center">
 	        <img src="../static/logo.png">
 		  	<br>
-		  	<a class="btn btn-primary" id= "signup" role="button">Sign Up</a>
-		  	<div id="signupForm">
-			  <h1>Sign Up for sCUrt</h1>
-			  <form action="#">
-			    <input placeholder="Email" type="email" required />
-			    <input placeholder="Password" type="text" required />
-			    <input placeholder="First Name" type="text" required />
-			    <input placeholder="Last Name" type="text" required />
-			    <input placeholder="Age" type="text" required />
-			    <input placeholder="Address" type="text" required />
-			    <input placeholder="Phone" type="text" required />
-			    <input class="formBtn" type="submit" />
-			  </form>
-			</div>
-	        <a class="btn btn-primary" id= "login" role="button">Login</a>
+		  	<br>
+		  	<button type='button' class="btn btn-primary" id="Sign Up" data-toggle="modal" data-target="#signUpWindow">Sign Up</button>
+		  		<div class="modal fade" id="signUpWindow">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <!-- header -->
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal"></button>
+			          <h3 class="modal-title">Sign Up for sCUrt!</h3>
+			        </div>
+			        <!-- body -->
+			        <div class="modal-header">
+			          <form action="/signup">
+			            <div class="form-group">
+			              <input type="email" class="form-control" placeholder="Email"/>
+			              <input type="password" class="form-control" placeholder="Password" />
+			            </div>
+			          </form>
+			        </div>
+			        <!-- footer -->
+			        <div class="modal-footer">
+			          <button class="btn btn-primary btn-block">Log In</button>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+
+	        <button type='button' class="btn btn-primary" id="Login" data-toggle="modal" data-target="#popUpWindow">Login</a>
 	      </div>
 	    </div>
 	  	</section>
 	</body>
+ 
+
 </html>
