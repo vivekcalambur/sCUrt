@@ -5,48 +5,177 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/add.css">
   </head>
   <body>
     <section class="jumbotron">
       <div class="container">
-        <div class="row text-center">
-          <img src="../static/logo.png">
+        <div class="row text-center", id = "row">
+          <img src="../static/logo.png" width="300" height="100">
         <br/><br/>
-        <button type='button' class="btn btn-primary" id="Sign Up" data-toggle="modal" data-target="#signUpWindow">Add Car</button>
-          <div class="modal fade" id="signUpWindow">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <!-- header -->
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"></button>
-                <h3 class="modal-title">REGISTER</h3>
-              </div>
-              <!-- body -->
-              <div class="modal-header">
-                <form action="/add_car" method="post">
-                  <div class="form-group">
-                    <input name="make" class="form-control" placeholder="make"/><br/>
-                    <input name="model" class="form-control" placeholder="model"/><br/>
-                    <input name="license_plate" type="email" class="form-control" placeholder="license plate number"/><br/>
-                    <input name="state" type="password" class="form-control" placeholder="State"/><br/>
-                    <input name="mpg" type="number" class="form-control" placeholder="mpg"/><br/>
-                    <input name="odometer" class="form-control" placeholder="odometer"/><br/>
-                  </div>
-              </div>
-              <!-- footer -->
-              <div class="modal-footer">
-                <button class="btn btn-primary btn-block">Sign Up</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
+        <div class="row text-center", id = "form">
+          <h2>Add Car</h2>
+          <p>Please input accurate information</p>
+          <div class="container">
+            <form action="/action_page.php">
+              <div class="row">
+                <div class="col-25">
+                  <label for="make">Make</label>
+                </div>
+                <div class="col-75">
+                  <select id="make" name="make" placeholder="make">
+                    <option value=""></option>
+                    <option value="ACURA">ACURA</option>
+                    <option value="ASTON MARTIN">ASTON MARTIN</option>
+                    <option value="AUDI">AUDI</option>
+                    <option value="BENTLEY">BENTLEY</option>
+                    <option value="BMW">BMW</option>
+                    <option value="BUICK">BUICK</option>
+                    <option value="CADILLAC">CADILLAC</option>
+                    <option value="CHEVROLET">CHEVROLET</option>
+                    <option value="CHRYSLER">CHRYSLER</option>
+                    <option value="DODGE">DODGE</option>
+                    <option value="FERRARI">FERRARI</option>
+                    <option value="FORD">FORD</option>
+                    <option value="GMC">GMC</option>
+                    <option value="HONDA">HONDA</option>
+                    <option value="HUMMER">HUMMER</option>
+                    <option value="HYUNDAI">HYUNDAI</option>
+                    <option value="INFINITI">INFINITI</option>
+                    <option value="ISUZU">ISUZU</option>
+                    <option value="JAGUAR">JAGUAR</option>
+                    <option value="JEEP">JEEP</option>
+                    <option value="KIA">KIA</option>
+                    <option value="LAMBORGHINI">LAMBORGHINI</option>
+                    <option value="LAND ROVER">LAND ROVER</option>
+                    <option value="LEXUS">LEXUS</option>
+                    <option value="LINCOLN">LINCOLN</option>
+                    <option value="LOTUS">LOTUS</option>
+                    <option value="MASERATI">MASERATI</option>
+                    <option value="MAYBACH">MAYBACH</option>
+                    <option value="MAZDA">MAZDA</option>
+                    <option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+                    <option value="MERCURY">MERCURY</option>
+                    <option value="MINI">MINI</option>
+                    <option value="MITSUBISHI">MITSUBISHI</option>
+                    <option value="NISSAN">NISSAN</option>
+                    <option value="PONTIAC">PONTIAC</option>
+                    <option value="PORSCHE">PORSCHE</option>
+                    <option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
+                    <option value="SAAB">SAAB</option>
+                    <option value="SATURN">SATURN</option>
+                    <option value="SUBARU">SUBARU</option>
+                    <option value="SUZUKI">SUZUKI</option>
+                    <option value="TOYOTA">TOYOTA</option>
+                    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                    <option value="VOLVO">VOLVO</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="model">Model</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" name="model" class="form-control" placeholder="model"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="state">State</label>
+                </div>
+                <div class="col-75">
+                  <select id="state" name="state" placeholder="state">
+                    <option value=""></option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="license_plate">License Plate Number</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="license_plate" class="form-control" placeholder="license plate number"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="mpg">Miles Per Gallon</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="mpg" class="form-control" placeholder="mpg"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="odometer">Odometer</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="odometer" class="form-control" placeholder="odometer"/>
+                </div>
+              </div>
+               <div class="row">
+                <button type="button" class="btn btn-primary" id="submit">
+                  <a href="/">Submit</a>
+              </div>
+            </form>
+          </div>
       </section>
   </body>
 </html>
