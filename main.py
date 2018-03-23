@@ -101,6 +101,10 @@ def login():
 def add_car():
     return render_template('add_car.html')
 
+@app.route("/update_car")
+def add_car():
+    return render_template('update_car.html')
+
 @app.route("/submit_add_car", methods=['POST'])
 def submit_add_car():
     state = request.form['state'].upper()
@@ -120,22 +124,12 @@ def submit_add_car():
 
     return render_template('login.html')
 
-# @app.route("/update_mileage", methods=['POST'])
-# def update_car():
-#     sql = "UPDATE Car SET odometer=odometer+%d"\
-#           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
-#           % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
-#     cursor.execute(sql)
-#     db.commit()
+@app.route("/submit_update_car", methods=['POST'])
+def submit_update_car():
+    sql = "UPDATE Car SET odometer=odometer+%d"\
+          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
+          % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
+    cursor.execute(sql)
+    db.commit()
 
-#     return render_template('login.html')
-
-# @app.route("/delete_car", methods=['POST'])
-# def delete_car():
-#     sql = "DELETE FROM Car"\
-#           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
-#           % (request.form['state'], request.form['license_plate']))
-#     cursor.execute(sql)
-#     db.commit()
-
-#     return render_template('login.html')
+    return render_template('login.html')
