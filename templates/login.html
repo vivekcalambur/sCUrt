@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Landing</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../static/login.css">
+</head>
+<body>
+  <header class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="../static/logo.png" width="250" height="80">
+      </div>
+      <div class="col-sm-8 text-right">
+        <nav>
+          <p> {{username}} </p>
+          <p> {{sign out}} </p>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <section class="jumbotron">
+    <div class="container">
+      <div class="row text-center">
+        <button type='button' class="btn btn-primary" id="addcar">Add Car</button>
+        <button type='button' class="btn btn-primary" id="schedcar">Schedule Car</button>
+      </div>
+      <br/>
+      <div class="row text-center">
+        <button type='button' class="btn btn-primary" id="editcar">Edit Cars</button>
+        <button type='button' class="btn btn-primary" id="bookcar">Book Car</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
