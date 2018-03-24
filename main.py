@@ -124,7 +124,7 @@ def submit_add_car():
 
 @app.route("/update_car")
 def update_car():
-    sql = "SELECT year, make, model, odometer FROM Cars "\
+    sql = "SELECT state, license_plate, odometer FROM Cars "\
           "WHERE owner_id=%d" % (session['user_id'])
     print(sql)
     cursor.execute(sql)
@@ -137,6 +137,7 @@ def update_car():
 
 @app.route("/submit_update_car", methods=['POST'])
 def submit_update_car():
+    print(request.form)
     sql = "UPDATE Car SET odometer=odometer+%d"\
           "WHERE state=\'%s\' AND license_plate=\'%s\'"\
           % (int(request.form['miles'],request.form['state'], request.form['license_plate']))

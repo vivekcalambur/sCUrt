@@ -33,29 +33,35 @@
       </div>
     </div>
     <section class="jumbotron">
+    <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
+      	<form method="post" action="/submit_update_car">
         <table>
           <caption>Your Cars</caption>
         <TR>
-          <th>Year</th>
-          <th>Make</th> 
-          <th>Model</th>
+          <th>State</th>
+          <th>License Plate</th> 
           <th>Odometer</th>
           <th>Delete</th>
         </TR>
         <TR>
           <!-- {% for car in cars %} -->
-           <TD class="Year">{{ car[0] }}</TD>
-           <TD class="Make">{{ car[1] }}</TD>
-           <TD class="Model">{{ car[2] }}</TD>
-           <TD class="Odometer"><input type="text" value={{ car[3] }} name="Odometer"></TD>
-           <TD class="Delete"><input type="checkbox" name="delete" />&nbsp;</TD>
+           <TD class="State">{{ car[0] }}</TD>
+           <TD class="License Plate">{{ car[1] }}</TD>
+           <TD class="Odometer"><input type="text" value={{ car[2] }} name="odometer"/></TD>
+           <TD class="Delete"><input type="checkbox" name="delete" value="true"/>&nbsp;</TD>
         </TR>
           <!-- {% endfor %} -->
         </table>
       </div>
       <div class="col-sm-2"></div>
+  	</div>
+  	<br/>
+  	<div class="row">
+      	<button class="btn btn-primary">Submit</button>
+    </div>
+    <form/>
     </section>
   </body>
 </html>
