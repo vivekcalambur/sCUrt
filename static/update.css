@@ -8,22 +8,27 @@ body {
 
 .jumbotron{
   background: none;
-  color: #fff;
 }
 
-.jumbotron a{
+caption{
+  text-align: center;
   color: #fff;
-}
-
-table{
-  color: #000;
-  border-spacing: 23px;
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 1px;
     padding: 5px;
     text-align: center;
+    vertical-align: middle;
+}
+
+input{
+  color: #000;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+  color: #000;
 }
 
 button {
