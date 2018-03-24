@@ -1,4 +1,4 @@
-CREATE TABLE Car(
+CREATE TABLE Cars(
 	state VARCHAR(255) ,
 	license_plate VARCHAR(255) ,
 	odometer INT,

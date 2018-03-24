@@ -97,13 +97,10 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route("/add_car")
 def add_car():
     return render_template('add_car.html')
-
-@app.route("/update_car")
-def add_car():
-    return render_template('update_car.html')
 
 @app.route("/submit_add_car", methods=['POST'])
 def submit_add_car():
@@ -115,7 +112,7 @@ def submit_add_car():
     model = request.form['model'].title()
     year = int(request.form['year'])
 
-    sql = "INSERT INTO Car (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
+    sql = "INSERT INTO Cars (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
           "VALUES (\'%s\', \'%s\', %d, %d, \'%s\', \'%s\', %d, %d)"\
           % (state, lic_plate, odometer, mpg, make, model, year, session['user_id'])
 
@@ -123,6 +120,20 @@ def submit_add_car():
     db.commit()
 
     return render_template('login.html')
+
+
+@app.route("/update_car")
+def update_car():
+    sql = "SELECT year, make, model, odometer FROM Cars "\
+          "WHERE owner_id=%d" % (session['user_id'])
+    print(sql)
+    cursor.execute(sql)
+    if not cursor.rowcount:
+        return render_template('update_car.html')
+    else:
+        cars = cursor.fetchall()
+
+    return render_template('update_car.html', cars=cars)
 
 @app.route("/submit_update_car", methods=['POST'])
 def submit_update_car():

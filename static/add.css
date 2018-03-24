@@ -9,6 +9,7 @@ body {
 .jumbotron{
 	background: none;
 	color: #fff;
+    align-items: center
 }
 
 .jumbotron a{
@@ -16,8 +17,8 @@ body {
 }
 
 select{
-	width: 100%;
-  color: #000;
+    width: 100%;
+    color: #000;
 }
 
 form{
@@ -45,7 +46,6 @@ label {
 .col-sm-4 {
 	display: inline-block;
     float: center;
-
 }
 
 /* Clear floats after the columns */
@@ -72,7 +72,7 @@ header .row{
   align-items: center;
 }
 
- header a{
+header a{
     color: #fff;
     text-decoration: none;
 }

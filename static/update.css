@@ -13,17 +13,29 @@ body {
 caption{
   text-align: center;
   color: #fff;
+  font-size: 20px
 }
 
-table, th, td {
+th, td {
     border: 1px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
 
+table {
+    align-self: center;
+    width: 100%;
+}
+
+.col-sm-8 {
+    display: flex;
+    justify-content: center;
+}
+
 input{
   color: #000;
+  width: 50%;
 }
 
 tr:nth-child(even) {
@@ -48,7 +60,7 @@ header .row{
   align-items: center;
 }
 
- header a{
+header a{
     color: #fff;
     text-decoration: none;
 }
