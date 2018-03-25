@@ -56,7 +56,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 def index():
     return render_template('index.html')
 
-# sign up
+# sign up submit
 @app.route("/signup", methods=['POST'])
 def signup():
     email = request.form['email'].lower()
@@ -75,7 +75,12 @@ def signup():
 
     return render_template('index.html')
 
-# login
+# landing page after login
+@app.route("/login_landing")
+def login_landing():
+    return render_template('login.html')
+
+# login submit
 @app.route("/login", methods=['POST'])
 def login():
     email = request.form['email']
@@ -95,15 +100,30 @@ def login():
 
     return render_template('login.html')
 
-@app.route("/login_landing")
-def login_landing():
-    return render_template('login.html')
+# clear session and go back to home page
+@app.route("/signout")
+def signout():
+    session.clear()
+    return redirect('/')
 
 
+# populate edit user
+@app.route("/edit_user")
+def edit_user():
+    return render_template('edit_user.html')
+
+# submit edit user
+@app.route("/submit_edit_user")
+def submit_edit_user():
+    return redirect(url_for('login_landing'))
+
+
+# add car landing
 @app.route("/add_car")
 def add_car():
     return render_template('add_car.html')
 
+# submit add car
 @app.route("/submit_add_car", methods=['POST'])
 def submit_add_car():
     state = request.form['state'].upper()
@@ -120,14 +140,16 @@ def submit_add_car():
     cursor.execute(sql)
     db.commit()
 
-    return render_template('login.html')
+    return redirect(url_for('login_landing'))
 
 
+# populate update car
 @app.route("/update_car")
 def update_car():
     sql = "SELECT state, license_plate, make, model, odometer FROM Cars "\
           "WHERE owner_id=%d" % (session['user_id'])
     cursor.execute(sql)
+
     if not cursor.rowcount:
         return render_template('update_car.html')
     else:
@@ -135,6 +157,7 @@ def update_car():
 
     return render_template('update_car.html', cars=cars)
 
+# submit update car
 @app.route("/submit_update_car", methods=['POST'])
 def submit_update_car():
     states = request.form.getlist('state')
