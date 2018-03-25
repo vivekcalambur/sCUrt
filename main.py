@@ -1,6 +1,6 @@
 import os
 import MySQLdb
-from flask import Flask, render_template, request, g, session
+from flask import Flask, render_template, request, session, redirect, url_for
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -70,7 +70,6 @@ def signup():
     sql = "INSERT INTO Users (email, password, first_name, last_name, age, address, phone) "\
           "VALUES (\'%s\', \'%s\', \'%s\', \'%s\', %d, \'%s\', \'%s\')"\
           % (email, pw, fname, lname, age, address, phone)
-
     cursor.execute(sql)
     db.commit()
 
@@ -85,16 +84,19 @@ def login():
     sql = "SELECT user_id, first_name, last_name from Users " \
           "WHERE email=\'%s\' AND password=\'%s\'"\
           % (email, pw)
-
     cursor.execute(sql)
+    
     if not cursor.rowcount:
         return render_template('index.html')
-
     else:
         record = cursor.fetchone()
         session['user_id'] = record[0]
         session['user_name'] = record[1] + ' ' + record[2]
 
+    return render_template('login.html')
+
+@app.route("/login_landing")
+def login_landing():
     return render_template('login.html')
 
 
@@ -115,7 +117,6 @@ def submit_add_car():
     sql = "INSERT INTO Cars (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
           "VALUES (\'%s\', \'%s\', %d, %d, \'%s\', \'%s\', %d, %d)"\
           % (state, lic_plate, odometer, mpg, make, model, year, session['user_id'])
-
     cursor.execute(sql)
     db.commit()
 
@@ -124,9 +125,8 @@ def submit_add_car():
 
 @app.route("/update_car")
 def update_car():
-    sql = "SELECT state, license_plate, odometer FROM Cars "\
+    sql = "SELECT state, license_plate, make, model, odometer FROM Cars "\
           "WHERE owner_id=%d" % (session['user_id'])
-    print(sql)
     cursor.execute(sql)
     if not cursor.rowcount:
         return render_template('update_car.html')
@@ -137,11 +137,21 @@ def update_car():
 
 @app.route("/submit_update_car", methods=['POST'])
 def submit_update_car():
-    print(request.form)
-    sql = "UPDATE Car SET odometer=odometer+%d"\
-          "WHERE state=\'%s\' AND license_plate=\'%s\'"\
-          % (int(request.form['miles'],request.form['state'], request.form['license_plate']))
-    cursor.execute(sql)
+    states = request.form.getlist('state')
+    lic_plates = request.form.getlist('license_plate')
+    odometers = request.form.getlist('odometer')
+    deletes = request.form.getlist('delete')
+
+    for i in range(0, len(lic_plates)):
+        sql = "UPDATE Cars SET odometer=%d WHERE state=\'%s\' and license_plate=\'%s\'"\
+              % (int(odometers[i]), states[i], lic_plates[i])
+        cursor.execute(sql)
+
+        if deletes[i] == 'yes':
+            sql = "DELETE FROM Cars WHERE state=\'%s\' and license_plate=\'%s\'"\
+                  % (states[i], lic_plates[i])
+            cursor.execute(sql)
+
     db.commit()
 
-    return render_template('login.html')
+    return redirect(url_for('update_car'))

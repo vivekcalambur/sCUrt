@@ -13,7 +13,10 @@ body {
 caption{
   text-align: center;
   color: #fff;
-  font-size: 20px
+}
+
+h2{
+  font-family: Raleway
 }
 
 .row {
@@ -30,7 +33,7 @@ th, td {
 
 table {
     align-self: center;
-    width: 75%;
+    width: 100%;
 }
 
 form {
@@ -52,7 +55,17 @@ input{
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
-  color: #000;
+  color: black;
+}
+
+tr:nth-child(odd) {
+  background-color: #696969;
+  color: white;
+}
+
+tr:first-child {
+  background-color: transparent;
+  color: white;
 }
 
 button {

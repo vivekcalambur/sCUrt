@@ -14,7 +14,9 @@
     <header class="container">
     <div class="row">
       <div class="col-sm-4">
-        <img src="../static/logo.png" width="180" height="60">
+        <a href="/login_landing">
+          <img src="../static/logo.png" width="180" height="60">
+        </a>
       </div>
       <div class="col-sm-4 text-center">
           <p>
@@ -36,21 +38,31 @@
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
-      	<form method="post" action="/submit_update_car">
+      	<form action="/submit_update_car", method="POST">
         <table>
-          <caption>Your Cars</caption>
+          <caption><h2>Your Cars</h2></caption>
         <TR>
           <th>State</th>
-          <th>License Plate</th> 
+          <th>License Plate</th>
+          <th>Make</th>
+          <th>Model</th> 
           <th>Odometer</th>
           <th>Delete</th>
         </TR>
         <TR>
           <!-- {% for car in cars %} -->
            <TD class="State">{{ car[0] }}</TD>
+           <input type="hidden" value = {{ car[0] }} name="state">
            <TD class="License Plate">{{ car[1] }}</TD>
-           <TD class="Odometer"><input type="text" value={{ car[2] }} name="odometer"/></TD>
-           <TD class="Delete"><input type="checkbox" name="delete" value="true"/>&nbsp;</TD>
+           <input type="hidden" value = {{ car[1] }} name="license_plate">
+           <TD class="Make">{{ car[2] }}</TD>
+           <TD class="Model">{{ car[3] }}</TD>
+           <TD class="Odometer"><input type="text" value={{ car[4] }} name="odometer"/></TD>
+           <TD class="Delete">
+             <select name="delete"> 
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+             </select>
         </TR>
           <!-- {% endfor %} -->
         </table>
