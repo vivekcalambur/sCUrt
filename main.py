@@ -1,4 +1,5 @@
 import os
+import datetime
 import MySQLdb
 from flask import Flask, render_template, request, session, redirect, url_for
 
@@ -150,7 +151,7 @@ def update_car():
           "WHERE owner_id=%d" % (session['user_id'])
     cursor.execute(sql)
 
-    if not cursor.rowcount:
+    if cursor.rowcount:
         return render_template('update_car.html')
     else:
         cars = cursor.fetchall()
@@ -178,3 +179,37 @@ def submit_update_car():
     db.commit()
 
     return redirect(url_for('update_car'))
+
+
+@app.route("/schedule_car")
+def schedule_car():
+    all_cars_sql = "SELECT state, license_plate, make, model FROM Cars "\
+          "WHERE owner_id=%d" % (session['user_id'])
+    cursor.execute(all_cars_sql)
+
+    all_cars = []
+    if cursor.rowcount:
+        all_cars = cursor.fetchall()
+
+    scheduled_cars = []
+    unscheduled_cars = []
+    for car in all_cars:
+        scheduled_cars_sql = "SELECT Cars.state, Cars.license_plate, make, model, start_date_time, end_date_time "\
+        	"FROM Availability, Cars "\
+            "WHERE Cars.state=Availability.state and Cars.license_plate=Availability.license_plate "\
+            "and Availability.state=\'%s\' and Availability.license_plate=\'%s\'" % (car[0], car[1])
+        cursor.execute(scheduled_cars_sql)
+
+        if cursor.rowcount:
+            orig = cursor.fetchone()
+            start_date = orig[4].strftime('%m/%d/%y')
+            start_time = orig[4].strftime('%H:%M')
+            end_date = orig[5].strftime('%m/%d/%y')
+            end_time = orig[5].strftime('%H:%M')
+
+            formatted = (orig[0], orig[1], orig[2], orig[3], start_date, start_time, end_date, end_time)
+            scheduled_cars.append(formatted)
+        else:
+            unscheduled_cars.append((car[0], car[1], car[2], car[3]))
+
+    return render_template('schedule_car.html', unscheduled=unscheduled_cars, scheduled=scheduled_cars)

@@ -52,13 +52,13 @@
           <th>End Time</th>
         </TR>
         <TR>
-          <!-- {% for car in cars %} -->
-           <TD class="State">{{ unscheduled[0] }}</TD>
-           <input type="hidden" value = {{ unscheduled[0] }} name="state">
-           <TD class="License Plate">{{ unscheduled[1] }}</TD>
-           <input type="hidden" value = {{ unscheduled[1] }} name="license_plate">
-           <TD class="Make">{{ unscheduled[2] }}</TD>
-           <TD class="Model">{{ unscheduled[3] }}</TD>
+          {% for car in unscheduled %}
+           <TD class="State">{{ car[0] }}</TD>
+           <input type="hidden" value = {{ car[0] }} name="state">
+           <TD class="License Plate">{{ car[1] }}</TD>
+           <input type="hidden" value = {{ car[1] }} name="license_plate">
+           <TD class="Make">{{ car[2] }}</TD>
+           <TD class="Model">{{ car[3] }}</TD>
            <TD class="StartDate" width="10%">
             <input id="date" type="date" style="width:150px">
            </TD>
@@ -72,6 +72,7 @@
              <input id="time" type="time" style="width:110px">
            </TD>
         </TR>
+        {% endfor %}
         </table>
       </div>
       <div class="col-sm-2"></div>
@@ -99,24 +100,24 @@
           <th>Delete</th>
         </TR>
         <TR>
-          <!-- {% for car in cars %} -->
-           <TD class="State">{{ scheduled[0] }}</TD>
-           <input type="hidden" value = {{ scheduled[0] }} name="state">
-           <TD class="License Plate">{{ scheduled[1] }}</TD>
-           <input type="hidden" value = {{ scheduled[1] }} name="license_plate">
-           <TD class="Make">{{ scheduled[2] }}</TD>
-           <TD class="Model">{{ scheduled[3] }}</TD>
+          {% for car in scheduled %}
+           <TD class="State">{{ car[0] }}</TD>
+           <input type="hidden" value = {{ car[0] }} name="state">
+           <TD class="License Plate">{{ car[1] }}</TD>
+           <input type="hidden" value = {{ car[1] }} name="license_plate">
+           <TD class="Make">{{ car[2] }}</TD>
+           <TD class="Model">{{ car[3] }}</TD>
            <TD class="StartDate" width="10%">
-            {{ scheduled[0] }}
+            {{ car[4] }}
            </TD>
            <TD class="StartTime">
-             {{ scheduled[0] }}
+             {{ car[5] }}
            </TD>
            <TD class="EndDate">
-             {{ scheduled[0] }}
+             {{ car[6] }}
            </TD>
            <TD class="EndTime">
-             {{ scheduled[0] }}
+             {{ car[7] }}
            </TD>
            <TD class="Delete">
              <select name="delete"> 
@@ -125,6 +126,7 @@
              </select>
             </TD>
         </TR>
+          {% endfor %}
         </table>
       </div>
       <div class="col-sm-2"></div>
