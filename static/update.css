@@ -15,6 +15,7 @@ caption{
   color: #fff;
 }
 
+
 h2{
   font-family: Raleway
 }
@@ -66,6 +67,11 @@ tr:nth-child(odd) {
 tr:first-child {
   background-color: transparent;
   color: white;
+}
+
+select
+{
+  color: black;
 }
 
 button {
