@@ -53,12 +53,12 @@
         </TR>
         <TR>
           <!-- {% for car in cars %} -->
-           <TD class="State">{{ car[0] }}</TD>
-           <input type="hidden" value = {{ car[0] }} name="state">
-           <TD class="License Plate">{{ car[1] }}</TD>
-           <input type="hidden" value = {{ car[1] }} name="license_plate">
-           <TD class="Make">{{ car[2] }}</TD>
-           <TD class="Model">{{ car[3] }}</TD>
+           <TD class="State">{{ unscheduled[0] }}</TD>
+           <input type="hidden" value = {{ unscheduled[0] }} name="state">
+           <TD class="License Plate">{{ unscheduled[1] }}</TD>
+           <input type="hidden" value = {{ unscheduled[1] }} name="license_plate">
+           <TD class="Make">{{ unscheduled[2] }}</TD>
+           <TD class="Model">{{ unscheduled[3] }}</TD>
            <TD class="StartDate" width="10%">
             <input id="date" type="date" style="width:150px">
            </TD>
@@ -100,23 +100,23 @@
         </TR>
         <TR>
           <!-- {% for car in cars %} -->
-           <TD class="State">{{ car[0] }}</TD>
-           <input type="hidden" value = {{ car[0] }} name="state">
-           <TD class="License Plate">{{ car[1] }}</TD>
-           <input type="hidden" value = {{ car[1] }} name="license_plate">
-           <TD class="Make">{{ car[2] }}</TD>
-           <TD class="Model">{{ car[3] }}</TD>
+           <TD class="State">{{ scheduled[0] }}</TD>
+           <input type="hidden" value = {{ scheduled[0] }} name="state">
+           <TD class="License Plate">{{ scheduled[1] }}</TD>
+           <input type="hidden" value = {{ scheduled[1] }} name="license_plate">
+           <TD class="Make">{{ scheduled[2] }}</TD>
+           <TD class="Model">{{ scheduled[3] }}</TD>
            <TD class="StartDate" width="10%">
-            {{ car[0] }}
+            {{ scheduled[0] }}
            </TD>
            <TD class="StartTime">
-             {{ car[0] }}
+             {{ scheduled[0] }}
            </TD>
            <TD class="EndDate">
-             {{ car[0] }}
+             {{ scheduled[0] }}
            </TD>
            <TD class="EndTime">
-             {{ car[0] }}
+             {{ scheduled[0] }}
            </TD>
            <TD class="Delete">
              <select name="delete"> 
