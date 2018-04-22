@@ -4,14 +4,15 @@ smelly
 smelled
 mess
 messy
-not clean
 
 >>un-reliable
-broke down
-flat tire
-broken windshield
-did not work
+broke
+flat
+broken
+disfunctional
+doesn't
 
 >>driving
-fun to drive
-steered well
+fun
+good
+well
