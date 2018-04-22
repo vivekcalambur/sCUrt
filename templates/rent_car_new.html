@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
-        <form action="rent_car_new.html", method="POST">
+        <form action="/submit_schedule_car", method="POST">
         <table class="center">
         <caption><h2>Input Timings</h2></caption>
         <TR>
@@ -73,6 +73,64 @@
     <br/>
     <br/>
     <br/>
+    </form>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+      <form action="/delete_scheduled_car", method="POST">
+        <table class="center">
+          <caption><h2>Available Cars</h2></caption>
+        <TR>
+          <th>State</th>
+          <th>License Plate</th>
+          <th>Make</th>
+          <th>Model</th> 
+          <th>Rating</th>
+          <th>Start Date</th>
+          <th>Start Time</th>
+          <th>End Date</th>
+          <th>End Time</th>
+          <th>Book</th>
+        </TR>
+        <TR>
+          {% for car in current_rentals %}
+           <TD class="State">{{ car[0] }}</TD>
+           <input type="hidden" value = {{ car[0] }} name="state">
+           <TD class="License Plate">{{ car[1] }}</TD>
+           <input type="hidden" value = {{ car[1] }} name="license_plate">
+           <TD class="Make">{{ car[2] }}</TD>
+           <TD class="Model">{{ car[3] }}</TD>
+           <TD class="Rating">{{ car[3] }}</TD>
+           <TD class="StartDate" width="10%">
+            <input name="start_date" type="date" style="width:150px">
+           </TD>
+           <TD class="StartTime">
+             <input name="start_time" type="time" style="width:110px">
+           </TD>
+           <TD class="EndDate">
+             <input name="end_date" type="date" style="width:150px">
+           </TD>
+           <TD class="EndTime">
+             <input name="end_time" type="time" style="width:110px">
+           </TD>
+           <TD class="Book">
+             <select name="delete"> 
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+             </select>
+            </TD>
+        </TR>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br/>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary">Submit</button>
+    </div>
     </form>
     </div>
     <div class="row">
