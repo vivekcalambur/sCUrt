@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
-      	<form action="/submit_update_car", method="POST">
+      	<form action="/submit_schedule_car", method="POST">
         <table>
           <caption><h2>Schedule A Car</h2></caption>
         <TR>
@@ -60,16 +60,16 @@
            <TD class="Make">{{ car[2] }}</TD>
            <TD class="Model">{{ car[3] }}</TD>
            <TD class="StartDate" width="10%">
-            <input id="date" type="date" style="width:150px">
+            <input name="start_date" type="date" style="width:150px">
            </TD>
            <TD class="StartTime">
-             <input id="time" type="time" style="width:110px">
+             <input name="start_time" type="time" style="width:110px">
            </TD>
            <TD class="EndDate">
-             <input id="date" type="date" style="width:150px">
+             <input name="end_date" type="date" style="width:150px">
            </TD>
            <TD class="EndTime">
-             <input id="time" type="time" style="width:110px">
+             <input name="end_time" type="time" style="width:110px">
            </TD>
         </TR>
         {% endfor %}
@@ -84,8 +84,8 @@
     <br/>
     <br/>
     <br/>
-    <form/>
-    <form action="/submit_update_car", method="POST">
+    </form>
+    <form action="/delete_scheduled_car", method="POST">
         <table>
           <caption><h2>Scheduled Cars</h2></caption>
         <TR>
@@ -107,16 +107,16 @@
            <input type="hidden" value = {{ car[1] }} name="license_plate">
            <TD class="Make">{{ car[2] }}</TD>
            <TD class="Model">{{ car[3] }}</TD>
-           <TD class="StartDate" width="10%">
+           <TD class="StartDate" width="10%", name="start_date">
             {{ car[4] }}
            </TD>
-           <TD class="StartTime">
+           <TD class="StartTime", name="start_time">
              {{ car[5] }}
            </TD>
-           <TD class="EndDate">
+           <TD class="EndDate", name="end_date">
              {{ car[6] }}
            </TD>
-           <TD class="EndTime">
+           <TD class="EndTime", name="end_time">
              {{ car[7] }}
            </TD>
            <TD class="Delete">
@@ -135,7 +135,7 @@
     <div class="row">
         <button class="btn btn-primary">Submit</button>
     </div>
-    <form/>
+    </form>
     </section>
   </body>
 </html>

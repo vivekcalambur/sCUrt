@@ -128,7 +128,7 @@ def add_car():
 @app.route("/submit_add_car", methods=['POST'])
 def submit_add_car():
     state = request.form['state'].upper()
-    lic_plate = request.form['license_plate'].upper()
+    lic_plate = request.form['license_plate'].replace(' ', '').upper()
     odometer = int(request.form['odometer'])
     mpg = int(request.form['mpg'])
     make = request.form['make'].title()
@@ -151,7 +151,7 @@ def update_car():
           "WHERE owner_id=%d" % (session['user_id'])
     cursor.execute(sql)
 
-    if cursor.rowcount:
+    if not cursor.rowcount:
         return render_template('update_car.html')
     else:
         cars = cursor.fetchall()
@@ -195,7 +195,7 @@ def schedule_car():
     unscheduled_cars = []
     for car in all_cars:
         scheduled_cars_sql = "SELECT Cars.state, Cars.license_plate, make, model, start_date_time, end_date_time "\
-        	"FROM Availability, Cars "\
+            "FROM Availability, Cars "\
             "WHERE Cars.state=Availability.state and Cars.license_plate=Availability.license_plate "\
             "and Availability.state=\'%s\' and Availability.license_plate=\'%s\'" % (car[0], car[1])
         cursor.execute(scheduled_cars_sql)
@@ -203,9 +203,9 @@ def schedule_car():
         if cursor.rowcount:
             orig = cursor.fetchone()
             start_date = orig[4].strftime('%m/%d/%y')
-            start_time = orig[4].strftime('%H:%M')
+            start_time = orig[4].strftime('%I:%M %p')
             end_date = orig[5].strftime('%m/%d/%y')
-            end_time = orig[5].strftime('%H:%M')
+            end_time = orig[5].strftime('%I:%M %p')
 
             formatted = (orig[0], orig[1], orig[2], orig[3], start_date, start_time, end_date, end_time)
             scheduled_cars.append(formatted)
@@ -213,3 +213,44 @@ def schedule_car():
             unscheduled_cars.append((car[0], car[1], car[2], car[3]))
 
     return render_template('schedule_car.html', unscheduled=unscheduled_cars, scheduled=scheduled_cars)
+
+@app.route("/submit_schedule_car", methods=['POST'])
+def submit_schedule_car():
+    states = request.form.getlist('state')
+    lic_plates = request.form.getlist('license_plate')
+    start_dates = request.form.getlist('start_date')
+    start_times = request.form.getlist('start_time')
+    end_dates = request.form.getlist('end_date')
+    end_times = request.form.getlist('end_time')
+
+    print end_times
+    for i in range(0, len(lic_plates)):
+        print end_times[i]
+        if start_dates[i] != '' and start_times[i] != '' and end_dates[i] != '' and end_times[i] != '':
+            start_date_time = start_dates[i] + ' ' + start_times[i]
+            end_date_time = end_dates[i] + ' ' + end_times[i]
+
+            sql = "INSERT INTO Availability VALUES (\'%s\', \'%s\', \'%s\', \'%s\')"\
+                % (states[i], lic_plates[i], start_date_time, end_date_time)
+            print(sql)
+            cursor.execute(sql)
+            db.commit()
+
+    return redirect(url_for('schedule_car'))
+    
+@app.route("/delete_scheduled_car", methods=['POST'])
+def delete_scheduled_car():
+    states = request.form.getlist('state')
+    lic_plates = request.form.getlist('license_plate')
+    deletes = request.form.getlist('delete')
+
+    for i in range(0, len(lic_plates)):
+        if deletes[i] == 'yes':
+            sql = "DELETE FROM Availability WHERE state=\'%s\' and license_plate=\'%s\'"\
+                  % (states[i], lic_plates[i])
+            cursor.execute(sql)
+
+    db.commit()
+
+    return redirect(url_for('schedule_car'))
+
