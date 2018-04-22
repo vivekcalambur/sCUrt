@@ -1,0 +1,17 @@
+>>cleanliness
+dirty
+smelly
+smelled
+mess
+messy
+not clean
+
+>>un-reliable
+broke down
+flat tire
+broken windshield
+did not work
+
+>>driving
+fun to drive
+steered well
