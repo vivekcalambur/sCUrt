@@ -50,7 +50,7 @@
           <th>Delete</th>
         </TR>
         <TR>
-          <!-- {% for car in cars %} -->
+          {% for car in cars %}
            <TD class="State">{{ car[0] }}</TD>
            <input type="hidden" value = {{ car[0] }} name="state">
            <TD class="License Plate">{{ car[1] }}</TD>
@@ -64,7 +64,7 @@
                 <option value="yes">Yes</option>
              </select>
         </TR>
-          <!-- {% endfor %} -->
+          {% endfor %}
         </table>
       </div>
       <div class="col-sm-2"></div>
