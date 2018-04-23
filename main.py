@@ -260,5 +260,13 @@ def submit_review():
     state = request.form['state'].upper()
     lic_plate = request.form['license_plate'].replace(' ', '').upper()
     review = request.form['text1'].upper()
-    values = run_content_analysis(review)
-    
+
+    get_review_data_sql = "SELECT aggregate,durability,cosmetics,cleanliness "\
+        "FROM Reviews"\
+        "WHERE state=\'%s\' and license_plate=\'%s\'" % (state, lic_plate)
+
+    cursor.execute(get_review_data_sql)
+    if cursor.rowcount:
+        current_numbers = cursor.fetchone()
+
+    values = run_content_analysis(review,current_numbers)

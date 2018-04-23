@@ -19,6 +19,7 @@ def run_content_analysis(review_text):
             scores[current_category] = 0
         else:
             line = line.strip()
+            print(line)
             if len(line) > 0:
                 pattern = re.compile(line, re.IGNORECASE)
                 dic[pattern] = current_category
@@ -37,6 +38,6 @@ def run_content_analysis(review_text):
     print(x[1:])
     return(x[1:])
 
-    
+
 if __name__ == '__main__':
-    blah = run_content_analysis('clean. dirty. ugly. broken. flat tire. messy. shiny.')
+    blah = run_content_analysis('not clean')

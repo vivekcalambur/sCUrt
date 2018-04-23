@@ -3,6 +3,7 @@ dirty
 smelly
 smelled
 mess
+not clean
 messy
 
 >>reliablity
