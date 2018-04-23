@@ -33,7 +33,28 @@ def run_content_analysis(review_text,numbers):
         print key, ":", scores[key]
         x.append(scores[key])
     print(len(text))
-    x[0]=numbers[0]
+    x[0]=numbers[1]+1
+    sum_of_blah=x[1]+x[2]+x[3]
+    x[1]=float(x[1])/float(3*sum_of_blah+0.1*len(text))
+    if x[1]>=0.02:
+        x[1]=numbers[2]-1
+    elif x[1]==0.0:
+        x[1]=numbers[2]+1
+    else:
+        x[1]=numbers[2]
+
+    x[2]=float(x[2])/float(3*sum_of_blah+0.1*len(text))
+    if x[2]>=0.02:
+        x[2]=numbers[3]+1
+    elif x[2]==0.0:
+        x[2]=numbers[3]
+
+    x[3]=float(x[3])/float(33*sum_of_blah+0.1*len(text))
+    if x[3]>=0.01:
+        x[3]=numbers[4]-1
+    else:
+        x[3]=numbers[4]+1
+
     new_aggregate=float(x[1]+x[2]+x[3])/float(3)
     print(new_aggregate)
     x.insert(0,new_aggregate)
@@ -43,4 +64,4 @@ def run_content_analysis(review_text,numbers):
 
 
 if __name__ == '__main__':
-    blah = run_content_analysis('dirty',[1,2,3,4,5])
+    blah = run_content_analysis('This was a very dirty and unreliable car that was prone to breaking down.We did not have a good experience.',[7,12,5,5,5])

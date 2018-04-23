@@ -6,12 +6,14 @@ mess
 not clean
 messy
 
->>reliablity
+>>reliability
 broke
 flat
 broken
 disfunctional
 doesn't
+unreliable
+breaking
 
 >>cosmetics
 pretty
