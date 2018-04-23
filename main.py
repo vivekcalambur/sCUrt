@@ -2,6 +2,7 @@ import os
 import datetime
 import MySQLdb
 from flask import Flask, render_template, request, session, redirect, url_for
+from nlp import run_content_analysis
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -91,7 +92,7 @@ def login():
           "WHERE email=\'%s\' AND password=\'%s\'"\
           % (email, pw)
     cursor.execute(sql)
-    
+
     if not cursor.rowcount:
         return render_template('index.html')
     else:
@@ -237,7 +238,7 @@ def submit_schedule_car():
             db.commit()
 
     return redirect(url_for('schedule_car'))
-    
+
 @app.route("/delete_scheduled_car", methods=['POST'])
 def delete_scheduled_car():
     states = request.form.getlist('state')
@@ -254,3 +255,10 @@ def delete_scheduled_car():
 
     return redirect(url_for('schedule_car'))
 
+@app.route("/submit_review", methods=['POST'])
+def submit_review():
+    state = request.form['state'].upper()
+    lic_plate = request.form['license_plate'].replace(' ', '').upper()
+    review = request.form['text1'].upper()
+    values = run_content_analysis(review)
+    
