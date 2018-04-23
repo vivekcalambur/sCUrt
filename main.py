@@ -403,3 +403,5 @@ def trip_planner():
 def submit_trip_planner():
     origin = request.form['origin']
     destination = request.form['destination']
+
+    return render_template('trip_planner_new.html', car=())
