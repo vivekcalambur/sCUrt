@@ -75,6 +75,16 @@ input[type=text]{
     border-radius: 4px;
 }
 
+input[type=date]{
+    width: 100%;
+    color: black;
+}
+
+input[type=list]{
+    width: 150px;
+    color: black;
+}
+
 label {
     display: inline-block;
     align-items: center;
