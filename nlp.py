@@ -1,5 +1,5 @@
 import sys, string, re
-def run_content_analysis(review_text):
+def run_content_analysis(review_text,numbers):
     dictfile = "content_analysis_review_dict.txt"
     text = string.split(review_text)
     a = open(dictfile)
@@ -33,11 +33,10 @@ def run_content_analysis(review_text):
     for key in sorted(scores.keys()):
         print key, ":", scores[key]
         x.append(scores[key])
-    print len(text)
     x.append(len(text))
     print(x[1:])
     return(x[1:])
 
 
 if __name__ == '__main__':
-    blah = run_content_analysis('not clean')
+    blah = run_content_analysis('not clean',[0,0,0,0,0])
