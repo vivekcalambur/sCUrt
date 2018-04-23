@@ -1,0 +1,19 @@
+>>cleanliness
+dirty
+smelly
+smelled
+mess
+not clean
+messy
+
+>>reliablity
+broke
+flat
+broken
+disfunctional
+doesn't
+
+>>cosmetics
+pretty
+shiny
+shine
