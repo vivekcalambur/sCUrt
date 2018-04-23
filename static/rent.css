@@ -1,0 +1,104 @@
+body { 
+  background: url(home_bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.jumbotron{
+  background: none;
+  margin: auto;
+}
+
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+caption{
+  text-align: center;
+  color: #fff;
+}
+
+
+h2{
+  font-family: Raleway
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+th, td {
+    border: 1px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+form {
+  align-self: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+input{
+  color: #000;
+  width: 60%;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+tr:nth-child(odd) {
+  background-color: #696969;
+  color: white;
+}
+
+tr:first-child {
+  background-color: transparent;
+  color: white;
+}
+
+select
+{
+  color: black;
+}
+
+button {
+    width: 120px;
+    height: 40px;
+}
+
+header {
+  padding: 5px;
+  color: #fff;
+  font-family: Raleway;
+  font-size: 16px
+}
+
+header .row{
+  display: flex;
+  align-items: center;
+}
+
+header a{
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}

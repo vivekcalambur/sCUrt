@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sCUrt</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/rent.css">
+  </head>
+  <body>
+    <header class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <a href="/login_landing">
+          <img src="../static/logo.png" width="180" height="60">
+        </a>
+      </div>
+      <div class="col-sm-4 text-center">
+          <p>
+            Welcome, {{ session['user_name'] }}!
+          </p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <nav>
+          <p>
+            <a href="/edit_user">Edit Profile</a>
+          </p>
+          <p>
+            <a href="/signout">Sign Out</a>
+          </p>
+        </nav>
+      </div>
+    </div>
+    <section class="jumbotron"  style="text-align:center;">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <form action="/search_cars", method="POST">
+        <table class="center">
+        <caption><h2>Input Timings</h2></caption>
+        <TR>
+          <th>Start Date</th>
+          <th>Start Time</th>
+          <th>End Date</th>
+          <th>End Time</th>
+          <th></th>
+        </TR>
+        <TR>
+           <TD class="StartDate" width="10%">
+            <input id="date" type="date" style="width:150px">
+           </TD>
+           <TD class="StartTime">
+             <input id="time" type="time" style="width:110px">
+           </TD>
+           <TD class="EndDate">
+             <input id="date" type="date" style="width:150px">
+           </TD>
+           <TD class="EndTime">
+             <input id="time" type="time" style="width:110px">
+           </TD>
+        </TR>
+        </table>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br/>
+    <div class="row">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    </form>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+      <form action="/update_rentals", method="POST">
+        <table class="center">
+          <caption><h2>Scheduled Cars</h2></caption>
+        <TR>
+          <th>State</th>
+          <th>License Plate</th>
+          <th>Make</th>
+          <th>Model</th> 
+          <th>Start Date</th>
+          <th>Start Time</th>
+          <th>End Date</th>
+          <th>End Time</th>
+          <th>Delete</th>
+        </TR>
+        <TR>
+          {% for car in current_rentals %}
+           <TD class="State">{{ car[0] }}</TD>
+           <input type="hidden" value = {{ car[0] }} name="state">
+           <TD class="License Plate">{{ car[1] }}</TD>
+           <input type="hidden" value = {{ car[1] }} name="license_plate">
+           <TD class="Make">{{ car[2] }}</TD>
+           <TD class="Model">{{ car[3] }}</TD>
+           <TD class="StartDate" width="10%", name="start_date">
+            {{ car[4] }}
+           </TD>
+           <TD class="StartTime", name="start_time">
+             {{ car[5] }}
+           </TD>
+           <TD class="EndDate", name="end_date">
+             {{ car[6] }}
+           </TD>
+           <TD class="EndTime", name="end_time">
+             {{ car[7] }}
+           </TD>
+           <TD class="Delete">
+             <select name="delete"> 
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+             </select>
+            </TD>
+        </TR>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br/>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+    </div>
+    </section>
+  </body>
+</html>
