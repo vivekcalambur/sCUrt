@@ -365,7 +365,7 @@ def submit_review():
     lic_plate = request.form['license_plate'].replace(' ', '').upper()
     review = request.form['text1'].upper()
 
-    get_review_data_sql = "SELECT overall_rating,reliability,cleanliness,cosmetics,number_of_reviews"\
+    get_review_data_sql = "SELECT overall_rating,number_of_reviews,cleanliness,cosmetics,reliability"\
         "FROM Reviews"\
         "WHERE state=\'%s\' and license_plate=\'%s\'" % (state, lic_plate)
 
@@ -375,7 +375,7 @@ def submit_review():
 
     values = run_content_analysis(review,current_numbers)
 
-    sql = "UPDATE Reviews SET overall_rating=%d, number_of_reviews=%d, reliability=%d, cleanliness=%d, cosmetics=%d WHERE state=\'%s\' and license_plate=\'%s\'"\
+    sql = "UPDATE Reviews SET overall_rating=%d, number_of_reviews=%d, cleanliness=%d, cosmetics=%d,reliability=%d, WHERE state=\'%s\' and license_plate=\'%s\'"\
           % (int(values[0]),int(values[1]),float(values[2]),float(values[3]),float(values[4]), state, lic_plate)
 
     cursor.execute(sql)

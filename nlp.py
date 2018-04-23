@@ -1,5 +1,6 @@
 import sys, string, re
 def run_content_analysis(review_text,numbers):
+    # The input order is [average,num_reviews,clean,cosmetic,reliable]
     dictfile = "content_analysis_review_dict.txt"
     text = string.split(review_text)
     a = open(dictfile)
@@ -7,11 +8,9 @@ def run_content_analysis(review_text,numbers):
     a.close()
     dic = {}
     scores = {}
-
     # a default category for simple word lists
     current_category = "Default"
     scores[current_category] = 0
-
     # inhale the dictionary
     for line in lines:
         if line[0:2] == '>>':
@@ -33,10 +32,15 @@ def run_content_analysis(review_text,numbers):
     for key in sorted(scores.keys()):
         print key, ":", scores[key]
         x.append(scores[key])
-    x.append(len(text))
-    print(x[1:])
-    return(x[1:])
+    print(len(text))
+    x[0]=numbers[0]
+    new_aggregate=float(x[1]+x[2]+x[3])/float(3)
+    print(new_aggregate)
+    x.insert(0,new_aggregate)
+    print(x)
+    # The return order is [average,num_reviews,clean,cosmetic,reliable]
+    return(x)
 
 
 if __name__ == '__main__':
-    blah = run_content_analysis('not clean',[0,0,0,0,0])
+    blah = run_content_analysis('dirty',[1,2,3,4,5])
