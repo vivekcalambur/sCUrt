@@ -224,16 +224,12 @@ def submit_schedule_car():
     end_dates = request.form.getlist('end_date')
     end_times = request.form.getlist('end_time')
 
-    print end_times
     for i in range(0, len(lic_plates)):
-        print end_times[i]
         if start_dates[i] != '' and start_times[i] != '' and end_dates[i] != '' and end_times[i] != '':
             start_date_time = start_dates[i] + ' ' + start_times[i]
             end_date_time = end_dates[i] + ' ' + end_times[i]
-
             sql = "INSERT INTO Availability VALUES (\'%s\', \'%s\', \'%s\', \'%s\')"\
                 % (states[i], lic_plates[i], start_date_time, end_date_time)
-            print(sql)
             cursor.execute(sql)
             db.commit()
 
@@ -254,6 +250,114 @@ def delete_scheduled_car():
     db.commit()
 
     return redirect(url_for('schedule_car'))
+
+@app.route("/rent_car")
+def rent_car():
+    sql = "SELECT Bookings.state, Bookings.license_plate, make, model, DATE(start_date_time), "\
+        "TIME(start_date_time), DATE(end_date_time), TIME(end_date_time) "\
+        "FROM Bookings, Cars WHERE renter_id=%d and Bookings.state=Cars.state "\
+        "and Bookings.license_plate=Cars.license_plate" % (session['user_id'])
+    cursor.execute(sql)
+    current_rentals = []
+    if cursor.rowcount:
+        current_rentals = cursor.fetchall()
+
+    return render_template('rent_car.html', current_rentals=current_rentals)
+
+@app.route("/search_cars", methods=['POST'])
+def search_cars():
+    start_date = request.form['start_date']
+    start_time = request.form['start_time']
+    end_date = request.form['end_date']
+    end_time = request.form['end_time']
+    start_date_time = start_date + ' ' + start_time
+    end_date_time = end_date + ' ' + end_time
+
+    available_sql = "SELECT state, license_plate FROM Availability "\
+        "WHERE start_date_time <= \'%s\' and end_date_time >= \'%s\'" % (start_date_time, end_date_time)
+    cursor.execute(available_sql)
+    available_cars = []
+    if cursor.rowcount:
+        available_cars = cursor.fetchall()
+
+    booking_sql = "SELECT state, license_plate FROM Bookings "\
+        "WHERE start_date_time <= \'%s\' and end_date_time >= \'%s\'" % (start_date_time, end_date_time)
+    cursor.execute(booking_sql)
+    booked_cars = []
+    if cursor.rowcount:
+        booked_cars = cursor.fetchall()
+
+    available_cars = [x for x in available_cars if x not in booked_cars]
+    available_cars_info = []
+    for car in available_cars:
+        sql = "SELECT Cars.state, Cars.license_plate, make, model, overall_rating FROM Cars, Ratings "\
+            "WHERE Cars.state=Ratings.state and Cars.license_plate=Ratings.license_plate and "\
+            "Cars.state=\'%s\' and Cars.license_plate=\'%s\'" % (car[0], car[1])
+        cursor.execute(sql)
+        if cursor.rowcount:
+            temp = list(cursor.fetchone())
+            temp.extend((start_date, start_time, end_date, end_time))
+            temp = tuple(temp)
+            available_cars_info.append(temp)
+
+    rented_sql = "SELECT Bookings.state, Bookings.license_plate, make, model, DATE(start_date_time), "\
+        "TIME(start_date_time), DATE(end_date_time), TIME(end_date_time) "\
+        "FROM Bookings, Cars WHERE renter_id=%d and Bookings.state=Cars.state "\
+        "and Bookings.license_plate=Cars.license_plate" % (session['user_id'])
+    cursor.execute(rented_sql)
+    current_rentals = []
+    if cursor.rowcount:
+        current_rentals = cursor.fetchall()
+
+    return render_template('rent_car_new.html', current_rentals=current_rentals, available_cars=available_cars_info)
+
+@app.route("/submit_rent_car", methods=['POST'])
+def submit_rent_car():
+    states = request.form.getlist('state')
+    lic_plates = request.form.getlist('license_plate')
+    start_dates = request.form.getlist('start_date')
+    start_times = request.form.getlist('start_time')
+    end_dates = request.form.getlist('end_date')
+    end_times = request.form.getlist('end_time')
+    books = request.form.getlist('book')
+
+    print request.form
+
+    for i in range(0, len(lic_plates)):
+        if books[i] == 'yes':
+            start_date_time = start_dates[i] + ' ' + start_times[i]
+            end_date_time = end_dates[i] + ' ' + end_times[i]
+            sql = "INSERT INTO Bookings VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\')"\
+                % (session['user_id'], states[i], lic_plates[i], start_date_time, end_date_time)
+            print(sql)
+            cursor.execute(sql)
+
+    db.commit()
+
+    return redirect(url_for('rent_car'))
+
+@app.route("/update_rentals", methods=['POST'])
+def update_rentals():
+    states = request.form.getlist('state')
+    lic_plates = request.form.getlist('license_plate')
+    start_dates = request.form.getlist('start_date')
+    start_times = request.form.getlist('start_time')
+    end_dates = request.form.getlist('end_date')
+    end_times = request.form.getlist('end_time')
+    deletes = request.form.getlist('delete')
+
+    for i in range(0, len(lic_plates)):
+        if deletes[i] == 'yes':
+            start_date_time = start_dates[i] + ' ' + start_times[i]
+            end_date_time = end_dates[i] + ' ' + end_times[i]
+            sql = "DELETE FROM Bookings WHERE state=\'%s\' and license_plate=\'%s\' "\
+                "and start_date_time=\'%s\' and end_date_time=\'%s\'" % (states[i], lic_plates[i], start_date_time, end_date_time)
+            cursor.execute(sql)
+
+    db.commit()
+
+    return redirect(url_for('rent_car'))
+
 
 @app.route("/submit_review", methods=['POST'])
 def submit_review():

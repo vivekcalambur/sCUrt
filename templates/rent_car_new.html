@@ -50,16 +50,16 @@
         </TR>
         <TR>
            <TD class="StartDate" width="10%">
-            <input id="date" type="date" style="width:150px">
+            <input name="start_date" type="date" style="width:150px">
            </TD>
            <TD class="StartTime">
-             <input id="time" type="time" style="width:110px">
+             <input name="start_time" type="time" style="width:110px">
            </TD>
            <TD class="EndDate">
-             <input id="date" type="date" style="width:150px">
+             <input name="end_date" type="date" style="width:150px">
            </TD>
            <TD class="EndTime">
-             <input id="time" type="time" style="width:110px">
+             <input name="end_time" type="time" style="width:110px">
            </TD>
         </TR>
         </table>
@@ -71,14 +71,12 @@
         <button class="btn btn-primary">Submit</button>
     </div>
     <br/>
-    <br/>
-    <br/>
     </form>
     </div>
     <div class="row">
-      <div class="col-sm-2"></div>
-      <div class="col-sm-8">
-      <form action="/submit_rent_Car", method="POST">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+      <form action="/submit_rent_car", method="POST">
         <table class="center">
           <caption><h2>Available Cars</h2></caption>
         <TR>
@@ -94,28 +92,24 @@
           <th>Book</th>
         </TR>
         <TR>
-          {% for car in current_rentals %}
+          {% for car in available_cars %}
            <TD class="State">{{ car[0] }}</TD>
            <input type="hidden" value = {{ car[0] }} name="state">
            <TD class="License Plate">{{ car[1] }}</TD>
            <input type="hidden" value = {{ car[1] }} name="license_plate">
            <TD class="Make">{{ car[2] }}</TD>
            <TD class="Model">{{ car[3] }}</TD>
-           <TD class="Rating">{{ car[3] }}</TD>
-           <TD class="StartDate" width="10%">
-            <input name="start_date" type="date" style="width:150px">
-           </TD>
-           <TD class="StartTime">
-             <input name="start_time" type="time" style="width:110px">
-           </TD>
-           <TD class="EndDate">
-             <input name="end_date" type="date" style="width:150px">
-           </TD>
-           <TD class="EndTime">
-             <input name="end_time" type="time" style="width:110px">
-           </TD>
+           <TD class="Rating">{{ car[4] }}</TD>
+           <TD class="StartDate" name="start_date">{{ car[5] }}</TD>
+           <input type="hidden" value = {{ car[5] }} name="start_date">
+           <TD class="StartTime" name="start_time">{{ car[6] }}</TD>
+           <input type="hidden" value = {{ car[6] }} name="start_time">
+           <TD class="EndDate" name="end_date">{{ car[7] }}</TD>
+           <input type="hidden" value = {{ car[7] }} name="end_date">
+           <TD class="EndTime" name="end_time">{{ car[8] }}</TD>
+           <input type="hidden" value = {{ car[8] }} name="end_time">
            <TD class="Book">
-             <select name="delete"> 
+             <select name="book"> 
                 <option value="no" selected>No</option>
                 <option value="yes">Yes</option>
              </select>
@@ -124,7 +118,7 @@
           {% endfor %}
         </table>
       </div>
-      <div class="col-sm-2"></div>
+      <div class="col-sm-1"></div>
     </div>
     <br/>
     </div>
@@ -134,8 +128,8 @@
     </form>
     </div>
     <div class="row">
-      <div class="col-sm-2"></div>
-      <div class="col-sm-8">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
       <form action="/update_rentals", method="POST">
         <table class="center">
           <caption><h2>Scheduled Cars</h2></caption>
@@ -158,18 +152,14 @@
            <input type="hidden" value = {{ car[1] }} name="license_plate">
            <TD class="Make">{{ car[2] }}</TD>
            <TD class="Model">{{ car[3] }}</TD>
-           <TD class="StartDate" width="10%", name="start_date">
-            {{ car[4] }}
-           </TD>
-           <TD class="StartTime", name="start_time">
-             {{ car[5] }}
-           </TD>
-           <TD class="EndDate", name="end_date">
-             {{ car[6] }}
-           </TD>
-           <TD class="EndTime", name="end_time">
-             {{ car[7] }}
-           </TD>
+           <TD class="StartDate" width="10%", name="start_date">{{ car[4] }}</TD>
+           <input type="hidden" value = {{ car[4] }} name="start_date">
+           <TD class="StartTime", name="start_time">{{ car[5] }}</TD>
+           <input type="hidden" value = {{ car[5] }} name="start_time">
+           <TD class="EndDate", name="end_date">{{ car[6] }}</TD>
+           <input type="hidden" value = {{ car[6] }} name="end_date">
+           <TD class="EndTime", name="end_time">{{ car[7] }}</TD>
+           <input type="hidden" value = {{ car[7] }} name="end_time">
            <TD class="Delete">
              <select name="delete"> 
                 <option value="no" selected>No</option>
@@ -180,7 +170,7 @@
           {% endfor %}
         </table>
       </div>
-      <div class="col-sm-2"></div>
+      <div class="col-sm-1"></div>
     </div>
     <br/>
     </div>
