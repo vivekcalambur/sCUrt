@@ -3,6 +3,7 @@ import datetime
 import MySQLdb
 from flask import Flask, render_template, request, session, redirect, url_for
 from nlp import run_content_analysis
+#from maps_api import get_distance_duration
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -136,13 +137,18 @@ def submit_add_car():
     model = request.form['model'].title()
     year = int(request.form['year'])
 
-    sql = "INSERT INTO Cars (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
+    cars_sql = "INSERT INTO Cars (state, license_plate, odometer, mpg, make, model, year, owner_id) "\
           "VALUES (\'%s\', \'%s\', %d, %d, \'%s\', \'%s\', %d, %d)"\
           % (state, lic_plate, odometer, mpg, make, model, year, session['user_id'])
-    cursor.execute(sql)
+    cursor.execute(cars_sql)
+
+    ratings_sql = "INSERT INTO RATINGS VALUES (\'%s\', \'%s\', %f, %f, %f, %f, %d)"\
+        % (state, lic_plate, 7.0, 7.0, 7.0, 7.0, 0)
+    cursor.execute(ratings_sql)
+
     db.commit()
 
-    return redirect(url_for('login_landing'))
+    return redirect(url_for('add_car'))
 
 
 # populate update car
@@ -373,4 +379,16 @@ def submit_review():
     if cursor.rowcount:
         current_numbers = cursor.fetchone()
 
-    values = run_content_analysis(review,current_numbers)
+    values = run_content_analysis(review, current_numbers)
+
+@app.route("/trip_planner")
+def trip_planner():
+    return render_template('trip_planner.html')
+
+@app.route("/submit_trip_planner", methods=['POST'])
+def submit_trip_planner():
+    origin = request.form['origin']
+    destination = request.form['destination']
+
+
+
