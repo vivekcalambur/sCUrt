@@ -53,7 +53,7 @@ def run_content_analysis(review_text,numbers):
     elif x[2]==0.0:
         x[2]=numbers[3]
 
-    x[3]=float(x[0]-1)/float(x[0])* (float(x[3])/float(33*sum_of_blah+0.1*len(text)))
+    x[3]=float(x[0]-1)/float(x[0])* (float(x[3])/float(3*sum_of_blah+0.1*len(text)))
     if x[3]>=0.01:
         x[3]=numbers[4]-1
     elif x[3]==0.0:
