@@ -148,7 +148,7 @@ def submit_add_car():
 
     db.commit()
 
-    return redirect(url_for('add_car'))
+    return redirect(url_for('login_landing'))
 
 
 # populate update car
@@ -365,28 +365,36 @@ def update_rentals():
     return redirect(url_for('rent_car'))
 
 
+@app.route("/write_review")
+def write_review():
+    return render_template('write_review.html')
+
 @app.route("/submit_review", methods=['POST'])
 def submit_review():
     state = request.form['state'].upper()
     lic_plate = request.form['license_plate'].replace(' ', '').upper()
-    review = request.form['text1'].upper()
+    review = request.form['review'].upper()
 
-    get_review_data_sql = "SELECT overall_rating,number_of_reviews,cleanliness,cosmetics,reliability"\
-        "FROM Reviews"\
+    get_review_data_sql = "SELECT overall_rating, number_of_reviews, cleanliness, cosmetics, reliability "\
+        "FROM Ratings "\
         "WHERE state=\'%s\' and license_plate=\'%s\'" % (state, lic_plate)
-
     cursor.execute(get_review_data_sql)
+
     if cursor.rowcount:
         current_numbers = cursor.fetchone()
 
     values = run_content_analysis(review, current_numbers)
 
-    sql = "UPDATE Reviews SET overall_rating=%d, number_of_reviews=%d, cleanliness=%d, cosmetics=%d,reliability=%d, WHERE state=\'%s\' and license_plate=\'%s\'"\
-          % (int(values[0]),int(values[1]),float(values[2]),float(values[3]),float(values[4]), state, lic_plate)
-
+    sql = "UPDATE Ratings SET overall_rating=%f, number_of_reviews=%d, cleanliness=%f, cosmetics=%f,reliability=%f "\
+        "WHERE state=\'%s\' and license_plate=\'%s\'"\
+        % (float(values[0]),int(values[1]),float(values[2]),float(values[3]),float(values[4]), state, lic_plate)
     cursor.execute(sql)
 
+    db.commit()
+
     return redirect(url_for('login_landing'))
+
+
 @app.route("/trip_planner")
 def trip_planner():
     return render_template('trip_planner.html')
