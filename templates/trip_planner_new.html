@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sCUrt</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/planner.css">
+  </head>
+  <body>
+    <header class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <a href="/login_landing">
+          <img src="../static/logo.png" width="180" height="60">
+        </a>
+      </div>
+      <div class="col-sm-4 text-center">
+          <p>
+            Welcome, {{ session['user_name'] }}!
+          </p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <nav>
+          <p>
+            <a href="/edit_user">Edit Profile</a>
+          </p>
+          <p>
+            <a href="/signout">Sign Out</a>
+          </p>
+        </nav>
+      </div>
+    </div>
+    </header>
+    <section class="jumbotron">
+      </div>
+        <div class="row text-center", id="form">
+          <h2>Trip Planner</h2>
+          <p>Input the following data to get the PERFECT Car</p>
+          <div class="container">
+            <form action="/submit_review" method="post">
+              <div class="row">
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" name="origin" class="form-control" placeholder="Origin"/>
+                </div>
+                <div class="col-sm-4">
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" name="destination" class="form-control" placeholder="Destination"/>
+                </div>
+                <div class="col-sm-4">
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                   <input type="text" name="trip_length" class="form-control" placeholder="Trip Duration (in days)"/>
+                </div>
+                <div class="col-sm-4">
+                </div>
+              </div>
+              <br/>
+              <br/>
+            </form>
+            <div class = "row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+              <form action="/submit_rent_car", method="POST" class='tablecar'>
+              <table class="center">
+                <caption ><h2>Recommended Car</h2></caption>
+              <TR>
+                <th>State</th>
+                <th>License Plate</th>
+                <th>Make</th>
+                <th>Model</th> 
+                <th>Rating</th>
+                <th>Start Date</th>
+                <th>Start Time</th>
+                <th>End Date</th>
+                <th>End Time</th>
+                <th>Book</th>
+              </TR>
+              <TR>
+              {% for car in available_cars %}
+               <TD class="State">{{ car[0] }}</TD>
+               <input type="hidden" value = {{ car[0] }} name="state">
+               <TD class="License Plate">{{ car[1] }}</TD>
+               <input type="hidden" value = {{ car[1] }} name="license_plate">
+               <TD class="Make">{{ car[2] }}</TD>
+               <TD class="Model">{{ car[3] }}</TD>
+               <TD class="Rating">{{ car[4] }}</TD>
+               <TD class="StartDate" name="start_date">{{ car[5] }}</TD>
+               <input type="hidden" value = {{ car[5] }} name="start_date">
+               <TD class="StartTime" name="start_time">{{ car[6] }}</TD>
+               <input type="hidden" value = {{ car[6] }} name="start_time">
+               <TD class="EndDate" name="end_date">{{ car[7] }}</TD>
+               <input type="hidden" value = {{ car[7] }} name="end_date">
+               <TD class="EndTime" name="end_time">{{ car[8] }}</TD>
+               <input type="hidden" value = {{ car[8] }} name="end_time">
+               <TD class="Book">
+                 <select name="book"> 
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                 </select>
+                </TD>
+            </TR>
+              {% endfor %}
+            </table>
+            </form>
+            </div>
+            <div class="col-sm-1"></div>
+            </div>
+            <br/>
+              <div class="row">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+          </div>
+        </div>
+      </section>
+  </body>
+</html>
