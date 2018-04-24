@@ -142,7 +142,9 @@ def submit_add_car():
           % (state, lic_plate, odometer, mpg, make, model, year, session['user_id'])
     cursor.execute(cars_sql)
 
-    ratings_sql = "INSERT INTO RATINGS VALUES (\'%s\', \'%s\', %f, %f, %f, %f, %d)"\
+    db.commit()
+
+    ratings_sql = "INSERT INTO Ratings VALUES (\'%s\', \'%s\', %f, %f, %f, %f, %d)"\
         % (state, lic_plate, 7.0, 7.0, 7.0, 7.0, 0)
     cursor.execute(ratings_sql)
 
@@ -319,7 +321,6 @@ def search_cars():
 
 @app.route("/submit_rent_car", methods=['POST'])
 def submit_rent_car():
-    print "hi"
     states = request.form.getlist('state')
     lic_plates = request.form.getlist('license_plate')
     start_dates = request.form.getlist('start_date')
@@ -334,7 +335,6 @@ def submit_rent_car():
             end_date_time = end_dates[i] + ' ' + end_times[i]
             sql = "INSERT INTO Bookings VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\')"\
                 % (session['user_id'], states[i], lic_plates[i], start_date_time, end_date_time)
-            print(sql)
             cursor.execute(sql)
 
     db.commit()
