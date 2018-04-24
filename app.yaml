@@ -11,6 +11,8 @@ handlers:
 libraries:
 - name: MySQLdb
   version: "latest"
+- name: ssl
+  version: "latest"
 
 env_variables:
     PROJECT_ID: scurt-198704

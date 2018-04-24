@@ -3,7 +3,7 @@ import datetime
 import MySQLdb
 from flask import Flask, render_template, request, session, redirect, url_for
 from nlp import run_content_analysis
-#from maps_api import get_distance_duration
+from maps_api import get_distance_duration
 
 # environment variables from app.yaml
 PROJECT_ID = os.environ.get('PROJECT_ID')
@@ -287,7 +287,7 @@ def search_cars():
         available_cars = cursor.fetchall()
 
     booking_sql = "SELECT state, license_plate FROM Bookings "\
-        "WHERE start_date_time <= \'%s\' and end_date_time >= \'%s\'" % (start_date_time, end_date_time)
+        "WHERE \'%s\' < end_date_time" % (start_date_time)
     cursor.execute(booking_sql)
     booked_cars = []
     if cursor.rowcount:
@@ -319,6 +319,7 @@ def search_cars():
 
 @app.route("/submit_rent_car", methods=['POST'])
 def submit_rent_car():
+    print "hi"
     states = request.form.getlist('state')
     lic_plates = request.form.getlist('license_plate')
     start_dates = request.form.getlist('start_date')
@@ -326,8 +327,6 @@ def submit_rent_car():
     end_dates = request.form.getlist('end_date')
     end_times = request.form.getlist('end_time')
     books = request.form.getlist('book')
-
-    print request.form
 
     for i in range(0, len(lic_plates)):
         if books[i] == 'yes':
@@ -403,5 +402,107 @@ def trip_planner():
 def submit_trip_planner():
     origin = request.form['origin']
     destination = request.form['destination']
+    start_date = request.form['start_date']
+    start_time = request.form['start_time']
+    end_date = request.form['end_date']
+    end_time = request.form['end_time']
 
-    return render_template('trip_planner_new.html', car=())
+    if start_time == 'Morning':
+        start_date_time = start_date + ' ' + '06:00'
+    elif start_time == 'Afternoon':
+        start_date_time = start_date + ' ' + '12:00'
+    else:
+        start_date_time = start_date + ' ' + '19:00'
+
+    if end_time == 'Morning':
+        end_date_time = end_date + ' ' + '12:00'
+    elif end_time == 'Afternoon':
+        end_date_time = end_date + ' ' + '19:00'
+    else:
+        end_date_time = end_date + ' ' + '06:00'
+
+    distance, duration = get_distance_duration(origin, destination)
+
+    if distance['value']/5280 < 75:
+        trip_length = 'short'
+    else:
+        trip_length = 'long'
+
+    sql = "SELECT age, address FROM Users where user_id = %d" % (session['user_id'])
+    cursor.execute(sql)
+    
+    temp = cursor.fetchone()
+    age = temp[0]
+    user_address = temp[1]
+
+    if age <= 30:
+        user_age = 'young'
+    else:
+        user_age = 'old'
+
+    available_sql = "SELECT state, license_plate FROM Availability "\
+        "WHERE start_date_time <= \'%s\' and end_date_time >= \'%s\'" % (start_date_time, end_date_time)
+    cursor.execute(available_sql)
+    available_cars = []
+    if cursor.rowcount:
+        available_cars = cursor.fetchall()
+
+    booking_sql = "SELECT state, license_plate FROM Bookings "\
+        "WHERE \'%s\' < end_date_time" % (start_date_time)
+    cursor.execute(booking_sql)
+    booked_cars = []
+    if cursor.rowcount:
+        booked_cars = cursor.fetchall()
+
+    available_cars = [x for x in available_cars if x not in booked_cars]
+    if len(available_cars) == 0:
+        return render_template('trip_planner_new.html', car=())
+
+    available_cars_info = []
+    for car in available_cars:
+        sql = "SELECT Cars.state, Cars.license_plate, Cars.year, Cars.mpg, "\
+        "Ratings.cleanliness, Ratings.reliability, Ratings.cosmetics, Users.address "\
+        "FROM Cars, Ratings, Users "\
+        "WHERE Cars.state=Ratings.state and Cars.license_plate=Ratings.license_plate and "\
+        "Cars.owner_id=Users.user_id and Cars.state=\'%s\' and Cars.license_plate=\'%s\'"\
+        % (car[0], car[1])
+        cursor.execute(sql)
+
+        if cursor.rowcount:
+            available_cars_info.append(cursor.fetchone())
+
+    score = dict()
+    for car in available_cars_info:
+        duration_score = 0
+        age_score = 0
+        distance_score = 0
+
+        if trip_length == 'long':
+            duration_score += (car[3]+(car[5]*4))
+
+        if user_age == 'young':
+            age_score += (((car[2]-2000)*2)+car[6]*4)
+        else:
+            age_score += (car[4]*6)
+
+        distance, duration = get_distance_duration(user_address, car[7])
+        distance_score = float(distance['value'])/float(265)
+
+        key = (car[0], car[1])
+        total_score = duration_score + age_score - distance_score
+
+        score[key] = total_score
+
+    v=list(score.values())
+    k=list(score.keys())
+    best_car = k[v.index(max(v))]
+
+    sql = "SELECT Cars.state, Cars.license_plate, make, model, overall_rating, \'%s\', \'%s\' "\
+        "FROM Cars, Ratings WHERE Cars.state=Ratings.state and Cars.license_plate=Ratings.license_plate "\
+        " and Cars.state=\'%s\' and Cars.license_plate=\'%s\'" % (start_date, end_date, best_car[0], best_car[1])
+    cursor.execute(sql)
+
+    if cursor.rowcount:
+        return_car = cursor.fetchone()
+
+    return render_template('trip_planner_new.html', car=return_car)

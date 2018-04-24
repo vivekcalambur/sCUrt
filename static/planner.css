@@ -43,6 +43,12 @@ form{
   background: none;
   align-items: center;
 }
+th, td {
+    border: 1px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
 
 tr:nth-child(even) {
   background-color: #f2f2f2;

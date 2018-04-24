@@ -146,12 +146,14 @@
                <TD class="Rating">{{ car[4] }}</TD>
                <TD class="StartDate" name="start_date">{{ car[5] }}</TD>
                <input type="hidden" value = {{ car[5] }} name="start_date">
-               <TD class="StartTime" name="start_time">{{ car[6] }}</TD>
-               <input type="hidden" value = {{ car[6] }} name="start_time">
-               <TD class="EndDate" name="end_date">{{ car[7] }}</TD>
-               <input type="hidden" value = {{ car[7] }} name="end_date">
-               <TD class="EndTime" name="end_time">{{ car[8] }}</TD>
-               <input type="hidden" value = {{ car[8] }} name="end_time">
+               <TD class="StartTime" name="start_time">
+                <input type="time" name="start_time">
+               </TD>
+               <TD class="EndDate" name="end_date">{{ car[6] }}</TD>
+               <input type="hidden" value = {{ car[6] }} name="end_date">
+               <TD class="EndTime" name="end_time">
+                <input type="time" name="end_time">
+               </TD>
                <TD class="Book">
                  <select name="book"> 
                     <option value="no" selected>No</option>
@@ -160,7 +162,6 @@
                 </TD>
             </TR>
             </table>
-            </form>
             </div>
             <div class="col-sm-1"></div>
             </div>
@@ -169,6 +170,7 @@
                 <button class="btn btn-primary">Submit</button>
               </div>
           </div>
+        </form>
         </div>
       </section>
   </body>
