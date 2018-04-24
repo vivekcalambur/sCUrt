@@ -86,7 +86,7 @@ def login_landing():
 # login submit
 @app.route("/login", methods=['POST'])
 def login():
-    email = request.form['email']
+    email = request.form['email'].lower()
     pw = request.form['password']
 
     sql = "SELECT user_id, first_name, last_name from Users " \
